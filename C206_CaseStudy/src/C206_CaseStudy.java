@@ -103,7 +103,8 @@ public class C206_CaseStudy {
 					subOption1();
 					choice = Helper.readInt("Enter choice > ");
 					if(choice == 1) {
-					//	addUser();
+						Account acc = inputUser();
+						C206_CaseStudy.addUser(accList, acc);
 					}else if(choice == 2) {
 					//	viewUser();
 					}else if(choice == 3) {
@@ -167,20 +168,26 @@ public class C206_CaseStudy {
 		output += "4. Quit";
 		System.out.println(output);
 	}
-
-	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
+	
+	public static Account inputUser() {
+		
 		String name = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role >");
 		int contact = Helper.readInt("Enter contact number >");
 		String email = Helper.readString("Enter email >");
 		String password = Helper.readString("Enter password >");
-
 		if (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
 			System.out.println("Please fill in all the neccessary field");
-		} else {
-			Account acc = new Account(name, role, email, password, contact);
-			accList.add(acc);
-		}
+		} 
+
+		Account acc = new Account(name, role, email, password, contact);
+
+		return acc;
+		
+	}
+	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
+		accList.add(acc1);
+
 
 	}
 

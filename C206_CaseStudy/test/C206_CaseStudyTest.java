@@ -23,10 +23,10 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 
 	}
-
+	@Test
 	public void addUserTest() {
 		// Item list is not null, so that can add a new item - boundary
-		assertNotNull("Check if there is valid account arraylist to add to", accListTest);
+	
 
 		// Given an empty list, after adding 1 item, the size of the list is 1 - normal
 		// The item just added is as same as the first item of the list
@@ -41,9 +41,10 @@ public class C206_CaseStudyTest {
 		assertSame("Check that account is added", acc2, accListTest.get(1));
 
 	}
+	@Test
 	public void viewUserTest () {
 		// Test if Item list is not null but empty -boundary
-		assertNotNull("Test if there is valid account arraylist to retrieve item", accListTest);
+
 		
 		//test if the list of account retrieved from the database is empty - boundary
 		String allUser= C206_CaseStudy.viewUser(accListTest);
@@ -63,6 +64,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllUserList", testOutput, allUser);
 		
 	}
+	@Test
 	public void delUserTest () {
 		C206_CaseStudy.addUser(accListTest, acc1);
 		C206_CaseStudy.addUser(accListTest, acc2);
