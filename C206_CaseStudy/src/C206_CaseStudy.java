@@ -17,7 +17,7 @@ public class C206_CaseStudy {
 		accList.add(new Account("PSH", "Admin", "1234@123com", "12345678", 87654321));
 		accList.add(new Account("dous", "Customer", "1234@123com", "douss", 87654321));
 		int choice = -1;
-		while (choice != 3 && !memAuthen(loginUser, loginPassword)) {
+		while (choice != 3) {
 			menuList();
 			Helper.line(50, "-");
 			choice = Helper.readInt("Enter choice > ");
@@ -70,7 +70,6 @@ public class C206_CaseStudy {
 
 	private static void memberhome(String username, String role) {
 		if (role.equals("Member")) {
-<<<<<<< HEAD
 			Helper.line(50, "-");
 			String output = "Login/Signup Page\n";
 			output += "1. Visitor Account Registration\n";
@@ -91,10 +90,8 @@ public class C206_CaseStudy {
 				}
 			}
 			
-=======
 			menuList();
 
->>>>>>> branch 'master' of https://github.com/20010754-Pang-ShengHui/C206_CaseStudy.git
 		} else if (role.trim().equals("Admin".trim())) {
 			int choice = -1;
 			while (choice != 6) {

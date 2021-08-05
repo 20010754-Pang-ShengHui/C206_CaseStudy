@@ -26,5 +26,9 @@ jobs:
       run: javac -cp C206_CaseStudy/bin:C206_CaseStudy/ant/junit.jar:C206_CaseStudy/ant/org.hamcrest.core_1.3.0.v201303031735.jar C206_CaseStudy/test/C206_CaseStudyTest.java -d C206_CaseStudy/bin
     - name: Run JUnit test
       run: java -cp C206_CaseStudy/bin:C206_CaseStudy/ant/junit.jar:C206_CaseStudy/ant/org.hamcrest.core_1.3.0.v201303031735.jar org.junit.runner.JUnitCore C206_CaseStudyTest
+    - name: Compile Appointment JUnit Test
+      run: javac -cp C206_CaseStudy/bin:AppointmentMain/ant/junit.jar:AppointmentMain/ant/org.hamcrest.core_1.3.0.v201303031735.jar AppointmentMain/test/AppointmentMainTest.java -d AppointmentMain/bin
+    - name: Run JUnit test
+      run: java -cp AppointmentMain/bin:AppointmentMain/ant/junit.jar:AppointmentMain/ant/org.hamcrest.core_1.3.0.v201303031735.jar org.junit.runner.JUnitCore AppointmentMainTest
     - name: Test Execution
       run: java -cp C206_CaseStudy/bin C206_CaseStudy< C206_CaseStudy/user_input.txt
