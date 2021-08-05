@@ -14,7 +14,7 @@ public class C206_CaseStudy {
 
 	private static void start() {
 
-		accList.add(new Account("PSH", "Admin", "1234@123.123.com", "12345678", 87654321));
+		accList.add(new Account("PSH", "Admin", "1234@123com", "12345678", 87654321));
 
 		int choice = -1;
 		while (choice != 3 && !memAuthen(loginUser, loginPassword)) {
