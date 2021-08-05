@@ -50,10 +50,11 @@ public class C206_CaseStudyTest {
 	public void viewUserTest() {
 		// Test if Item list is not null but empty -boundary
 		assertNotNull("Check if there is valid account arraylist to add to", accListTest);
+		
 		// test if the list of account retrieved from the database is empty - boundary
 		String allUser = C206_CaseStudy.viewUser(accListTest);
-		String testOutput = "No users found";
-		assertEquals("Check that ViewAllaccountlist", testOutput, allUser);
+		String testOutput = "No users found\n";
+		assertSame("Check that ViewAllaccountlist", testOutput, allUser);
 
 		// Given an empty list, after adding 2 items, test if the size of the list is 2
 		// - normal
@@ -66,7 +67,6 @@ public class C206_CaseStudyTest {
 		allUser = C206_CaseStudy.viewUser(accListTest);
 		testOutput = String.format("%-20s %-10s %-20s %-10s\n", "dous", "Customer", "1234@123com", "87654321");
 		testOutput += String.format("%-20s %-10s %-20s %-10s\n", "teo", "Admin", "55@123com", "12345678");
-
 		assertEquals("Test that ViewAllUserList", testOutput, allUser);
 
 	}
@@ -85,6 +85,7 @@ public class C206_CaseStudyTest {
 		// test that the successful message displayed
 		String delMsgTest = acc1.getName() + " has been successfully deleted";
 		assertEquals("Test that successful message displayed", delUser, delMsgTest);
+
 
 		// test that account deleted is the correct one
 		String delMsgErrorTest = "No user with that name is found";
