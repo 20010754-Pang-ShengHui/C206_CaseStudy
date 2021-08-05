@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class C206_CaseStudy {
+public class C206_CaseStudyMain {
 
 	private static ArrayList<Account> accList = new ArrayList<>();
 	private static String loginUser;
@@ -12,12 +12,10 @@ public class C206_CaseStudy {
 	}
 
 	private static void start() {
-
-
 		
-		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678",87654321));
-		
+		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678"));
 		int choice = -1;
+		
 		while (choice!=3 && !memAuthen(loginUser,loginPassword)) {
 			menuList();
 			Helper.line(50, "-");
@@ -104,8 +102,19 @@ public class C206_CaseStudy {
 			
 		}
 	}
-
+	
+	private static void addUser() {
+		String name = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role >");
+		String email = Helper.readString("Enter email >");
+		String password = Helper.readString("Enter password >");
 		
+		
+		Account acc  = new Account(name,role,email,password);
+		accList.add(acc);
+		
+		
+	}
 
 	private static void designerView() {
 		Helper.line(50, "-");
@@ -118,7 +127,7 @@ public class C206_CaseStudy {
 	private static void adminView() {
 		Helper.line(50, "-");
 		String output = "Home Page\n";
-		output += "1. Manage Account\n";
+		output += "1. Manage Customer\n";
 		output += "2. Manage Package\n";
 		output += "3. Manage Request for Quotation\n";
 		output += "4. Manage Quotation\n";
@@ -127,36 +136,4 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
-	private static void addUser() {
-		String name = Helper.readString("Enter name > ");
-		String role = Helper.readString("Enter role >");
-		int contact = Helper.readInt("Enter contact number >");
-		String email = Helper.readString("Enter email >");
-		String password = Helper.readString("Enter password >");
-		
-		
-		Account acc  = new Account(name,role,email,password,contact);
-		accList.add(acc);
-		
-	}
-	
-	private void viewUser() {
-		String output = "";
-		output += String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT");
-		for (Account show : accList) {
-			output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(), show.getContact());
-		}
-		System.out.println(output);
-	
-	}
-	
-	private void delUser() {
-		String name = Helper.readString("Enter name to delete > ");
-		for (Account i : accList) {
-			if (i.getName().equalsIgnoreCase(name)) {
-				accList.remove(i);
-			}
-		}
-		
-	}
 }
