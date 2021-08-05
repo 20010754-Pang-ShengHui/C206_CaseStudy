@@ -17,4 +17,32 @@ public class Appointment {
 		Address=addr;
 	}
 
+	public String getuName() {
+		return uName;
+	}
+
+	public LocalDate getDoA() {
+		return DoA;
+	}
+
+	public LocalTime getToA() {
+		return ToA;
+	}
+
+	public String getdName() {
+		return dName;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setDoA(LocalDate doA) {
+		DoA = doA;
+	}
+
+	public void setToA(LocalTime toA) {
+		ToA = toA;
+	}
+
 }
