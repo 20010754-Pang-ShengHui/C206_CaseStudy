@@ -38,8 +38,8 @@ public class AppointmentMain {
 				String addr = Helper.readString("Enter Address > ");
 				LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
 				LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
-				apptList.add(new Appointment(usN, lcDate,lcTime, dName, addr));
-				System.out.println("Appointment Added!");
+				Appointment apt = new Appointment(usN, lcDate,lcTime, dName, addr);
+				addApt(apptList,apt);
 			}
 			else if (choice==2) {
 				viewApt();
@@ -57,7 +57,11 @@ public class AppointmentMain {
 		
 	}
 	
-	private static void viewApt() {
+	public static void addApt(ArrayList<Appointment> aptList, Appointment apt) {
+		aptList.add(apt);
+		System.out.println("Appointment Added!");
+	}
+	public static void viewApt() {
 		if (!apptList.isEmpty()) {
 			String o = String.format(
 					"%-4s %-10s %-13s %-15s %-10s %s\n",
@@ -75,7 +79,7 @@ public class AppointmentMain {
 		
 	}
 	
-	private static void changeApt() {
+	public static void changeApt() {
 
 		if (!apptList.isEmpty()) {
 			viewApt();
@@ -136,7 +140,7 @@ public class AppointmentMain {
 		}
 	}
 	
-	private static void deleteApt() {
+	public static void deleteApt() {
 		if (!apptList.isEmpty()) {
 			viewApt();
 			int dApt = (Helper.readInt("Appointment no. > ")-1);
