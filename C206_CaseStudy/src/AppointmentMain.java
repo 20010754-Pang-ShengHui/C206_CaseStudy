@@ -7,23 +7,24 @@ public class AppointmentMain {
 
 
 	private static ArrayList<Appointment> apptList = new ArrayList<Appointment>();
+	
+	private static String un = "PSH";
+	private static String rl = "Admin";
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
-		start("PSH","Admin");
+		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
+		start(un,rl);
 	}
 	
 	public static void start(String un,String role) {
 		int choice = -1;
 		
-		LocalDate testDate = LocalDate.parse("05/08/2021",DateTimeFormatter.ofPattern("d/MM/yyyy"));
-		LocalTime testTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("H:mm"));
-		apptList.add(new Appointment("ShengHui",testDate,testTime,"LooSee","Singapore"));
 		while (choice!=5) {
 			Helper.line(70, "-");
 			String output = "Appointment Page\n";
-			output += "1. Add Appoitment\n";
-			output += "2. View Appoitment\n";
+			output += "1. Add Appointment\n";
+			output += "2. View Appointment\n";
 			output += "3. Change Appointment\n";
 			output += "4. Delete Appointment\n";
 			output += "5. Quit";
@@ -43,9 +44,10 @@ public class AppointmentMain {
 			else if (choice==2) {
 				viewApt();
 			} else if (choice==3) {
-				viewApt();
-				int choiceApt = Helper.readInt("Appointment no. > ")-1;
-//				changeApt(choiceApt);
+				changeApt();
+			}
+			else if (choice==4) {
+				deleteApt();
 			}
 		}
 		if (choice==5) {
@@ -56,31 +58,112 @@ public class AppointmentMain {
 	}
 	
 	private static void viewApt() {
-		String o = String.format(
-				"%-4s %-10s %-13s %-15s %-10s %s\n",
-				"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
-		o+="-------------------------------------------------------------------------------------------------------------------------\n";
-		for (int i = 0;i<apptList.size();i++) {
-			Appointment a = apptList.get(i);
-			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
+		if (!apptList.isEmpty()) {
+			String o = String.format(
+					"%-4s %-10s %-13s %-15s %-10s %s\n",
+					"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
+			o+="-------------------------------------------------------------------------------------------------------------------------\n";
+			for (int i = 0;i<apptList.size();i++) {
+				Appointment a = apptList.get(i);
+				o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
+			}
+			System.out.println(o);
+		} else {
+			Helper.line(70, "-");
+			System.out.println("There are no Appointments made at the moment.");
 		}
-		System.out.println(o);
+		
 	}
 	
-//	private static void changeApt(int apt) {
-//		Helper.line(70, "-");
-//		String output = "Appointment Page\n";
-//		output += "1. Add Appoitment\n";
-//		output += "2. View Appoitment\n";
-//		output += "3. Change Appointment\n";
-//		output += "4. Delete Appointment\n";
-//		output += "5. Quit";
-//		System.out.println(output);
-//		int choice = Helper.readInt("Enter choice > ");
-//		for (int i = 0;i<apptList.size();i++) {
-//			Appointment a = apptList.get(i);
-//			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
-//		}
-//		System.out.println(o);
-//	}
+	private static void changeApt() {
+
+		if (!apptList.isEmpty()) {
+			viewApt();
+			int cApt = (Helper.readInt("Appointment no. > ")-1);
+			Helper.line(70, "-");
+			int choice = 0;
+			while (choice!=3) {
+				viewApt();
+				String output = "Appointment Page\n";
+				output += "1. Change Date\n";
+				output += "2. Change Time\n";
+				output += "3. Back\n";
+				output += "4. Logout & Quit";
+				System.out.println(output);
+				choice = Helper.readInt("Enter choice > ");
+				if (choice==1) {
+					for (int i = 0;i<apptList.size();i++) {
+						Appointment a = apptList.get(i);
+						if (cApt==i) {
+							String date = Helper.readString("Enter new date (DD/MM/YYYY) > ");
+							LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
+							a.setDoA(lcDate);
+							break;
+						}
+					}
+					System.out.println("Date is successfully changed!");
+				}
+				else if (choice==2) {
+					for (int i = 0;i<apptList.size();i++) {
+						Appointment a = apptList.get(i);
+						if (cApt==i) {
+							String time = Helper.readString("Enter new time in 24Hrs (HH:MM) > ");
+							LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
+							a.setToA(lcTime);
+							break;
+						}
+					}
+					System.out.println("Time is successfully changed!");
+
+				} else if (choice>4 || choice<0) {
+					System.out.println("Invalid Input!");
+				} else if (choice==4) {
+					System.out.println("Bye!");
+					System.exit(1);
+				}
+			}
+			if (choice==3) {
+				System.out.println("Going back...");
+				try {
+		            Thread.sleep(500);
+		         } catch (Exception e) {
+		            System.out.println(e);
+		         }
+			}
+		} else {
+			Helper.line(70, "-");
+			System.out.println("There are no Appointments made at the moment.");
+		}
+	}
+	
+	private static void deleteApt() {
+		if (!apptList.isEmpty()) {
+			viewApt();
+			int dApt = (Helper.readInt("Appointment no. > ")-1);
+			char yn = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
+			if (yn=='Y' || yn=='y') {
+				for (int i = 0;i<apptList.size();i++) {
+					Appointment a = apptList.get(i);
+					if (i==dApt) {
+						apptList.remove(i);
+						System.out.println("Your Appointment is successfully deleted!");
+						break;
+					}
+				}
+				
+			} else if (yn=='N' || yn=='n') {
+				System.out.println("Deletion canceled!");
+				System.out.println("Going back...");
+				try {
+		            Thread.sleep(500);
+		         } catch (Exception e) {
+		            System.out.println(e);
+		         }
+			}
+		} else {
+			Helper.line(70, "-");
+			System.out.println("There are no Appointments made at the moment.");
+		
+		}
+	}
 }
