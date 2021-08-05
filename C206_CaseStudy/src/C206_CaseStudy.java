@@ -13,7 +13,7 @@ public class C206_CaseStudy {
 
 	private static void start() {
 		
-		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678","New"));
+		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678"));
 		int choice = -1;
 		
 		while (choice!=3 && !memAuthen(loginUser,loginPassword)) {
@@ -21,13 +21,7 @@ public class C206_CaseStudy {
 			Helper.line(50, "-");
 			choice = Helper.readInt("Enter choice > ");
 			if (choice==1) {
-				String username = Helper.readString("Username > ");
-				String role = Helper.readString("Role > ");
-				String email = Helper.readString("Email Address > ");
-				String Pw = Helper.readString("New Password > ");
-				String cPw = Helper.readString("Confirm Password > ");
-				String status = "New";
-				register(username,role,email,Pw,cPw,status);
+				addUser();
 			} else if (choice==2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
@@ -53,23 +47,6 @@ public class C206_CaseStudy {
 		output += "2. Login\n";
 		output += "3. Quit";
 		System.out.println(output);
-	}
-
-	private static boolean register(String un,String role,String email, String Pw, String cpw,String status) {
-		boolean success = false;
-		if (Pw.equals(cpw)) {
-			if (Pw.length()>=8) {
-				accList.add(new Account(un,role,email,Pw,"New"));
-				System.out.println("Registeration Successful!");
-				rl = role;
-				success = true;
-			} else if (Pw.length()<=8) {
-				System.out.println("Password must be atleast 8 characters and longers!\nRegistration Failed!");
-			}
-		} else {
-			System.out.println("Password does not match.\nRegistration Failed!");
-		}
-		return success;
 	}
 
 	private static boolean memAuthen(String username,String Pw) {
@@ -124,6 +101,19 @@ public class C206_CaseStudy {
 			}
 			
 		}
+	}
+	
+	private static void addUser() {
+		String name = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role >");
+		String email = Helper.readString("Enter email >");
+		String password = Helper.readString("Enter password >");
+		
+		
+		Account acc  = new Account(name,role,email,password);
+		accList.add(acc);
+		
+		
 	}
 
 	private static void designerView() {
