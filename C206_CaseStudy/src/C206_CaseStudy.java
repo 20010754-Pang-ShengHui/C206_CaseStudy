@@ -15,7 +15,7 @@ public class C206_CaseStudy {
 	private static void start() {
 
 		accList.add(new Account("PSH", "Admin", "1234@123com", "12345678", 87654321));
-
+		accList.add(new Account("dous", "Customer", "1234@123com", "douss", 87654321));
 		int choice = -1;
 		while (choice != 3 && !memAuthen(loginUser, loginPassword)) {
 			menuList();
@@ -61,6 +61,9 @@ public class C206_CaseStudy {
 				success = true;
 				break;
 			}
+			else {
+				System.out.println("Wrong Password or Username");
+			}
 		}
 		return success;
 	}
@@ -74,13 +77,30 @@ public class C206_CaseStudy {
 			while (choice != 6) {
 				adminView();
 				choice = Helper.readInt("Enter choice > ");
-				if (choice == 4) {
+				if(choice == 1) {
+					subOption1();
+					choice = Helper.readInt("Enter choice > ");
+					if(choice == 1) {
+						addUser();
+					}else if(choice == 2) {
+						viewUser();
+					}else if(choice == 3) {
+						delUser();
+					}
+				}else if(choice == 2) {
+					
+				}else if(choice == 3) {
+					
+				}else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
 				} else if (choice == 5) {
 					AppointmentMain.start(username, rl);
 					break;
+				}else {
+					System.out.println("invalid");
 				}
+				
 			}
 
 		} else if (role.trim().equals("Designer".trim())) {
@@ -116,6 +136,15 @@ public class C206_CaseStudy {
 		output += "6. Quit";
 		System.out.println(output);
 	}
+	private static void subOption1() {
+		Helper.line(50, "-");
+		String output = "";
+		output += "1. Add User Account\n";
+		output += "2. View User Account\n";
+		output += "3. Delete User Account \n";
+		output += "4. Quit";
+		System.out.println(output);
+	}
 
 	private static void addUser() {
 		String name = Helper.readString("Enter name > ");
@@ -133,7 +162,7 @@ public class C206_CaseStudy {
 
 	}
 
-	private void viewUser() {
+	private static void viewUser() {
 		String output = "";
 		if (accList.isEmpty()) {
 			output = "No users found";
@@ -149,11 +178,13 @@ public class C206_CaseStudy {
 
 	}
 
-	private void delUser() {
+	private static void delUser() {
 		String name = Helper.readString("Enter name to delete > ");
 		for (Account i : accList) {
 			if (i.getName().equalsIgnoreCase(name)) {
 				accList.remove(i);
+				System.out.println(name + " has been successfully deleted");
+				break;
 			}
 		}
 
