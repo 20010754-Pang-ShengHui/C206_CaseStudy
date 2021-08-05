@@ -27,7 +27,7 @@ public class QuotationMain {
 		
 	}
 	
-    public void addQuotation(ArrayList<Quotation> quoteList) {
+    public static void addQuotation() {
 		
 		int reqid = Helper.readInt("Enter Request ID: ");
 		int quotid = Helper.readInt("Enter Quotation ID:");
@@ -38,41 +38,64 @@ public class QuotationMain {
 		String startdate = Helper.readString("Enter Start Date(mm/dd/yyyy): ");
 		double totalamt = Helper.readDouble("Enter Total Amount: $");
 		
-		Quotation quote = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
-		quoteList.add(quote);
-		
-	}
-	
-	public void viewQuotations(ArrayList<Quotation> quoteList) {
-		
-		System.out.println("VIEW ALL QUOTATIONS");
-		System.out.println(String.format("%-10s %-30s %-10s %-10s %-20s %-10s %-10s %-20s\n", "REQUEST ID", 
-				"QUOTATION ID", "CATEGORY", "DESCRIPTION", "PRICE", "DESIGNER NAME", "START DATE", 
-				"TOTAL AMOUNT"));
-		
-		for (int i = 0; i < quoteList.size(); i++) {
+		if (categ.isEmpty() || descrip.isEmpty() ) {
+			System.out.println("Please fill in all the neccessary field");
 			
-			Quotation q = quoteList.get(i);
-			System.out.println(String.format("%-10d %-10d %-13s %-15s %-.2f %-15s %-15s %-.2f\n", q.getReqid(), 
-					q.getQuotid(), q.getCateg(), q.getDescrip(), q.getPrice(), q.getDesname(), 
-					q.getStartdate(), q.getTotalamt()));
+		} else {
+		
+		    Quotation quote = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
+		    quoteList.add(quote);
 		}
 		
 	}
 	
-	public void deleteQuotation(ArrayList<Quotation> quoteList) {
+	public static void viewQuotations() {
 		
-		int delquote = Helper.readInt("Enter a Quotation ID to delete: ");
+		if (!quoteList.isEmpty()) {
+		    System.out.println("VIEW ALL QUOTATIONS");
+		    System.out.println(String.format("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n", "REQUEST ID", 
+				"QUOTATION ID", "CATEGORY", "DESCRIPTION", "PRICE", "DESIGNER NAME", "START DATE", 
+				"TOTAL AMOUNT"));
 		
-		for (int i = 0; i < quoteList.size(); i++) {
+		    for (int i = 0; i < quoteList.size(); i++) {
 			
-			Quotation q = quoteList.get(i);
-			if (delquote == q.getQuotid()) {
-				
-			}
+			    Quotation q = quoteList.get(i);
+			    System.out.println(String.format("%-10d %-15d %-15s %-15s %-15.2f %-15s %-15s %-15.2f\n", q.getReqid(), 
+					q.getQuotid(), q.getCateg(), q.getDescrip(), q.getPrice(), q.getDesname(), 
+					q.getStartdate(), q.getTotalamt()));
+		    }
+		} else {
+			Helper.line(70, "-");
+			System.out.println("There are no Quotations currently.");
+		}
+	}
+	
+	public static void deleteQuotation() {
 		
-	    }
+		if (!quoteList.isEmpty()) {
+			
+			viewQuotations();
+		    int delquote = Helper.readInt("Enter a Quotation ID to delete: ");
+		    char yn = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
+		    
+		    if (yn=='Y' || yn=='y') {
+		        for (int i = 0; i < quoteList.size(); i++) {
+			
+			        Quotation q = quoteList.get(i);
+			        if (delquote == q.getQuotid()) {
+				        quoteList.remove(q);
+				        System.out.println("Your Quotation is successfully deleted!");
+			        }
 		
+	            }
+		        
+		    } else if (yn=='N' || yn=='n') {
+				System.out.println("Deletion canceled!");
+		    }
+		} else {
+			Helper.line(70, "-");
+			System.out.println("There are no Quotations currently.");
+		}
 	}
 
 }
