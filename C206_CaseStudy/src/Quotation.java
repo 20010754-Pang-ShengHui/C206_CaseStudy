@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class Quotation {
 	
 	private int reqid;
@@ -8,10 +6,10 @@ public class Quotation {
 	private String descrip;
 	private double price;
 	private String desname;
-	private LocalDate startdate;
+	private String startdate;
 	private double totalamt;
 	
-	public Quotation(int reqid, int quotid, String categ, String descrip, double price, String desname, LocalDate startdate, double totalamt) {
+	public Quotation(int reqid, int quotid, String categ, String descrip, double price, String desname, String startdate, double totalamt) {
 		this.reqid = reqid;
 		this.quotid = quotid;
 		this.categ = categ;
@@ -70,11 +68,11 @@ public class Quotation {
 		this.desname = desname;
 	}
 
-	public LocalDate getStartdate() {
+	public String getStartdate() {
 		return startdate;
 	}
 
-	public void setStartdate(LocalDate startdate) {
+	public void setStartdate(String startdate) {
 		this.startdate = startdate;
 	}
 
