@@ -18,6 +18,7 @@ public class C206_CaseStudyTest {
 		acc2 = new Account("teo", "Admin", "55@123com", "123", 12345678);
 	}
 
+	@Test
 	public void c206_test() {
 		// fail("Not yet implemented");
 		assertTrue("C206_CaseStudy_SampleTest ", true);

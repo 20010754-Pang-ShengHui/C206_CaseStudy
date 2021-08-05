@@ -37,6 +37,7 @@ public class C206_CaseStudy {
 		}
 		if (choice == 3) {
 			System.out.println("Bye!");
+			System.out.println("Test");
 		}
 
 	}
