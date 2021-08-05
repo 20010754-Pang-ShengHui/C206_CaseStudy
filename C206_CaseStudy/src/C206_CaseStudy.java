@@ -140,8 +140,13 @@ public class C206_CaseStudy {
 		String startdate = Helper.readString("Enter Start Date(mm/dd/yyyy): ");
 		double totalamt = Helper.readDouble("Enter Total Amount: $");
 		
+		ArrayList<Quotation> quoteList = new ArrayList<Quotation>();
 		
+		Quotation quote = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
+		quoteList.add(quote);
 		
 	}
 	
 }
+
+
