@@ -67,11 +67,13 @@ public class C206_CaseStudyTest {
 		C206_CaseStudy.addUser(accListTest, acc1);
 		C206_CaseStudy.addUser(accListTest, acc2);
 		assertEquals("Test that account arraylist size is 2", 2, accListTest.size());
+		
 		//test that account is deleted
 		String delUser = C206_CaseStudy.delUser(accListTest,acc1);
 		assertEquals("Test that account arraylist size is 1", 1, accListTest.size());
+		
 		//test that account deleted is the correct one
-		assertEquals("Test that account deleted  is account 1", delUser, acc1);
+		assertSame("Test that account deleted  is account 1", delUser, acc1);
 		
 		//test that the input name displayed
 		String delName = acc1.getName();
