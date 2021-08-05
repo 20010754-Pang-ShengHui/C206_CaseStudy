@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -126,6 +127,21 @@ public class C206_CaseStudy {
 		output += "5. Manage Appoitment\n";
 		output += "6. Quit";
 		System.out.println(output);
+	}
+	
+	public void addQuotation() {
+		
+		int reqid = Helper.readInt("Enter Request ID: ");
+		int quotid = Helper.readInt("Enter Quotation ID:");
+		String categ = Helper.readString("Enter Renovation Category: ");
+		String descrip = Helper.readString("Enter Description: ");
+		double price = Helper.readDouble("Enter Item Price: ");
+		String desname = Helper.readString("Enter Designer Name: ");
+		String startdate = Helper.readString("Enter Start Date(mm/dd/yyyy): ");
+		double totalamt = Helper.readDouble("Enter Total Amount: $");
+		
+		
+		
 	}
 	
 }
