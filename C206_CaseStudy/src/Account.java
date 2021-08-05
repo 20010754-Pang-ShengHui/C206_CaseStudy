@@ -6,13 +6,23 @@ public class Account {
 	private String email;
 	private String password;
 	private String status;
+	private Integer contact;
 	
-	public Account(String name, String role, String email, String password) {
+	public Account(String name, String role, String email, String password, Integer contact) {
 		this.name = name;
 		this.role = role;
 		this.email = email;
 		this.password = password;
+		this.contact = contact;
 		this.status = "new";
+	}
+
+	public Integer getContact() {
+		return contact;
+	}
+
+	public void setContact(Integer contact) {
+		this.contact = contact;
 	}
 
 	public String getName() {

@@ -5,26 +5,31 @@ public class C206_CaseStudy {
 	private static ArrayList<Account> accList = new ArrayList<>();
 	private static String loginUser;
 	private static String loginPassword;
+	private static String rl;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		start();
 	}
 
 	private static void start() {
-		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678"));
-		menuList();
-		Helper.line(50, "-");
-		int choice = Helper.readInt("Enter choice > ");
+
+
 		
+		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678",87654321));
+		
+		int choice = -1;
 		while (choice!=3 && !memAuthen(loginUser,loginPassword)) {
+			menuList();
+			Helper.line(50, "-");
+			choice = Helper.readInt("Enter choice > ");
 			if (choice==1) {
 				addUser();
 			} else if (choice==2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
-				memAuthen(username,Pw);
-				
-				
+				if (memAuthen(username,Pw)) {
+					memberhome(username, rl);
+				}
 				
 			} else if (choice>3 || choice<1) {
 				System.out.println("Invalid Choice!");
@@ -46,7 +51,6 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-
 	private static boolean memAuthen(String username,String Pw) {
 		boolean success = false;
 		for (int i = 0;i<accList.size();i++) {
@@ -54,6 +58,7 @@ public class C206_CaseStudy {
 			if (a.getName().equals(username) && a.getPassword().equals(Pw)) {
 				loginUser=username;
 				loginPassword=Pw;
+				rl = a.getRole();
 				System.out.println("Authentication Success!");
 				success = true;
 				break;
@@ -71,28 +76,43 @@ public class C206_CaseStudy {
 			output += "3. Quit";
 			System.out.println(output);
 			
-		} else if (role.equals("Admin")) {
-			adminView();
-			int choice = Helper.readInt("Enter choice > ");
-			
+		} else if (role.trim().equals("Admin".trim())) {
+			int choice = -1;
 			while (choice!=6) {
-				if (choice==5) {
-					AppointmentMain.start(username,role);
+			adminView();
+			choice = Helper.readInt("Enter choice > ");
+				if (choice==4) {
+					QuotationMain.start(username, rl);
+					break;
+				}
+				else if (choice==5) {
+					AppointmentMain.start(username,rl);
+					break;
 				}
 			}
 			
-		} else if (role.equals("Designer")) {
-			Helper.line(50, "-");
-			String output = "Home Page\n";
-			output += "1. Manage Customer\n";
-			output += "2. Manage Package\n";
-			output += "3. Manage Request for Quotation\n";
-			output += "4. Manage Quotation\n";
-			output += "5. Manage Appoitment\n";
-			output += "6. Quit";
-			System.out.println(output);
+		} else if (role.trim().equals("Designer".trim())) {
+			int choice = -1;
+			while (choice!=2) {
+				designerView();
+				choice = Helper.readInt("Enter choice > ");
+				if (choice==1) {
+					QuotationMain.start(username, rl);
+					break;
+				}
+			}
 			
 		}
+	}
+
+		
+
+	private static void designerView() {
+		Helper.line(50, "-");
+		String output = "Home Page\n";
+		output += "1. Manage Quotation\n";
+		output += "2. Quit";
+		System.out.println(output);
 	}
 	
 	private static void adminView() {
@@ -102,7 +122,7 @@ public class C206_CaseStudy {
 		output += "2. Manage Package\n";
 		output += "3. Manage Request for Quotation\n";
 		output += "4. Manage Quotation\n";
-		output += "5. Manage Appoitment\n";
+		output += "5. Manage Appointment\n";
 		output += "6. Quit";
 		System.out.println(output);
 	}
@@ -110,32 +130,33 @@ public class C206_CaseStudy {
 	private static void addUser() {
 		String name = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role >");
+		int contact = Helper.readInt("Enter contact number >");
 		String email = Helper.readString("Enter email >");
 		String password = Helper.readString("Enter password >");
 		
 		
-		Account acc  = new Account(name,role,email,password);
+		Account acc  = new Account(name,role,email,password,contact);
 		accList.add(acc);
 		
 	}
 	
 	private void viewUser() {
 		String output = "";
-		output += String.format("%-20s %-10s\n", "ITEM", "PRICE");
-	//	for (Item show : itemList) {
-	//		output += String.format("%-20s %-10.2f\n", wordProper(show.getType()), show.getPrice());
-	//	}
+		output += String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT");
+		for (Account show : accList) {
+			output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(), show.getContact());
+		}
 		System.out.println(output);
 	
 	}
 	
 	private void delUser() {
 		String name = Helper.readString("Enter name to delete > ");
-	//	for (Item i : itemList) {
-	//		if (i.getPrice().equals lowest.getPrice()) {
-	//			remove
-//			}
-//		}
+		for (Account i : accList) {
+			if (i.getName().equalsIgnoreCase(name)) {
+				accList.remove(i);
+			}
+		}
 		
 	}
 }
