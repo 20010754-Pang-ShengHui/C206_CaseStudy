@@ -62,7 +62,7 @@ public class C206_CaseStudy {
 				System.out.println("Authentication Success!");
 				success = true;
 				break;
-			} 
+			}
 		}
 		return success;
 	}
@@ -80,14 +80,11 @@ public class C206_CaseStudy {
 				adminView();
 				choice = Helper.readInt("Enter choice > ");
 				if (choice == 2) {
-					
-					
+
 				} else if (choice == 3) {
-				
+
 				}
 			}
-
-			menuList();
 
 		} else if (role.trim().equals("Admin".trim())) {
 			int choice = -1;
@@ -175,16 +172,16 @@ public class C206_CaseStudy {
 		int contact = Helper.readInt("Enter contact number >");
 		String email = Helper.readString("Enter email >");
 		String password = Helper.readString("Enter password >");
-		
+
 		while (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
 			System.out.println("Please fill in all the neccessary field");
-			 name = Helper.readString("Enter name > ");
-			 role = Helper.readString("Enter role >");
-			 contact = Helper.readInt("Enter contact number >");
-			 email = Helper.readString("Enter email >");
-			 password = Helper.readString("Enter password >");
-		} 
-		
+			name = Helper.readString("Enter name > ");
+			role = Helper.readString("Enter role (Admin/Member/Designer) > ");
+			contact = Helper.readInt("Enter contact number >");
+			email = Helper.readString("Enter email >");
+			password = Helper.readString("Enter password >");
+		}
+
 		acc = new Account(name, role, email, password, contact);
 		return acc;
 	}
@@ -192,7 +189,7 @@ public class C206_CaseStudy {
 	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
 		accListTest.add(acc1);
 		System.out.println("Account successfully created");
-		
+
 	}
 
 	public static String viewUser(ArrayList<Account> accListTest) {
@@ -203,7 +200,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.print(String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT"));
 			for (Account show : accListTest) {
-				 output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(),
+				output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(),
 						show.getContact());
 			}
 		}
@@ -223,8 +220,7 @@ public class C206_CaseStudy {
 				accListTest.remove(i);
 				output = name + " has been successfully deleted";
 				break;
-			}
-			else {
+			} else {
 				output = "No user with that name is found";
 			}
 		}
