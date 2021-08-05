@@ -50,6 +50,29 @@ public class QuotationMain {
 				"QUOTATION ID", "CATEGORY", "DESCRIPTION", "PRICE", "DESIGNER NAME", "START DATE", 
 				"TOTAL AMOUNT"));
 		
+		for (int i = 0; i < quoteList.size(); i++) {
+			
+			Quotation q = quoteList.get(i);
+			System.out.println(String.format("%-10d %-10d %-13s %-15s %-.2f %-15s %-15s %-.2f\n", q.getReqid(), 
+					q.getQuotid(), q.getCateg(), q.getDescrip(), q.getPrice(), q.getDesname(), 
+					q.getStartdate(), q.getTotalamt()));
+		}
+		
+	}
+	
+	public void deleteQuotation(ArrayList<Quotation> quoteList) {
+		
+		int delquote = Helper.readInt("Enter a Quotation ID to delete: ");
+		
+		for (int i = 0; i < quoteList.size(); i++) {
+			
+			Quotation q = quoteList.get(i);
+			if (delquote == q.getQuotid()) {
+				
+			}
+		
+	    }
+		
 	}
 
 }
