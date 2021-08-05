@@ -1,4 +1,3 @@
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class C206_CaseStudy {
@@ -6,21 +5,21 @@ public class C206_CaseStudy {
 	private static ArrayList<Account> accList = new ArrayList<>();
 	private static String loginUser;
 	private static String loginPassword;
-	
-	private static ArrayList<Quotation> quoteList = new ArrayList<>();
-	
+	private static String rl;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		start();
 	}
 
 	private static void start() {
+		
 		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678","New"));
-		menuList();
-		Helper.line(50, "-");
-		int choice = Helper.readInt("Enter choice > ");
+		int choice = -1;
 		
 		while (choice!=3 && !memAuthen(loginUser,loginPassword)) {
+			menuList();
+			Helper.line(50, "-");
+			choice = Helper.readInt("Enter choice > ");
 			if (choice==1) {
 				String username = Helper.readString("Username > ");
 				String role = Helper.readString("Role > ");
@@ -32,9 +31,9 @@ public class C206_CaseStudy {
 			} else if (choice==2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
-				memAuthen(username,Pw);
-				
-				
+				if (memAuthen(username,Pw)) {
+					memberhome(username, rl);
+				}
 				
 			} else if (choice>3 || choice<1) {
 				System.out.println("Invalid Choice!");
@@ -62,6 +61,7 @@ public class C206_CaseStudy {
 			if (Pw.length()>=8) {
 				accList.add(new Account(un,role,email,Pw,"New"));
 				System.out.println("Registeration Successful!");
+				rl = role;
 				success = true;
 			} else if (Pw.length()<=8) {
 				System.out.println("Password must be atleast 8 characters and longers!\nRegistration Failed!");
@@ -79,6 +79,7 @@ public class C206_CaseStudy {
 			if (a.getName().equals(username) && a.getPassword().equals(Pw)) {
 				loginUser=username;
 				loginPassword=Pw;
+				rl = a.getRole();
 				System.out.println("Authentication Success!");
 				success = true;
 				break;
@@ -96,28 +97,41 @@ public class C206_CaseStudy {
 			output += "3. Quit";
 			System.out.println(output);
 			
-		} else if (role.equals("Admin")) {
-			adminView();
-			int choice = Helper.readInt("Enter choice > ");
-			
+		} else if (role.trim().equals("Admin".trim())) {
+			int choice = -1;
 			while (choice!=6) {
-				if (choice==5) {
-					AppointmentMain.start(username,role);
+			adminView();
+			choice = Helper.readInt("Enter choice > ");
+				if (choice==4) {
+					QuotationMain.start(username, rl);
+					break;
+				}
+				else if (choice==5) {
+					AppointmentMain.start(username,rl);
+					break;
 				}
 			}
 			
-		} else if (role.equals("Designer")) {
-			Helper.line(50, "-");
-			String output = "Home Page\n";
-			output += "1. Manage Customer\n";
-			output += "2. Manage Package\n";
-			output += "3. Manage Request for Quotation\n";
-			output += "4. Manage Quotation\n";
-			output += "5. Manage Appoitment\n";
-			output += "6. Quit";
-			System.out.println(output);
+		} else if (role.trim().equals("Designer".trim())) {
+			int choice = -1;
+			while (choice!=2) {
+				designerView();
+				choice = Helper.readInt("Enter choice > ");
+				if (choice==1) {
+					QuotationMain.start(username, rl);
+					break;
+				}
+			}
 			
 		}
+	}
+
+	private static void designerView() {
+		Helper.line(50, "-");
+		String output = "Home Page\n";
+		output += "1. Manage Quotation\n";
+		output += "2. Quit";
+		System.out.println(output);
 	}
 	
 	private static void adminView() {
@@ -127,35 +141,9 @@ public class C206_CaseStudy {
 		output += "2. Manage Package\n";
 		output += "3. Manage Request for Quotation\n";
 		output += "4. Manage Quotation\n";
-		output += "5. Manage Appoitment\n";
+		output += "5. Manage Appointment\n";
 		output += "6. Quit";
 		System.out.println(output);
 	}
 	
-	public void addQuotation(ArrayList<Quotation> quoteList) {
-		
-		int reqid = Helper.readInt("Enter Request ID: ");
-		int quotid = Helper.readInt("Enter Quotation ID:");
-		String categ = Helper.readString("Enter Renovation Category: ");
-		String descrip = Helper.readString("Enter Description: ");
-		double price = Helper.readDouble("Enter Item Price: ");
-		String desname = Helper.readString("Enter Designer Name: ");
-		String startdate = Helper.readString("Enter Start Date(mm/dd/yyyy): ");
-		double totalamt = Helper.readDouble("Enter Total Amount: $");
-		
-		Quotation quote = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
-		quoteList.add(quote);
-		
-	}
-	
-	public void viewQuotations(ArrayList<Quotation> quoteList) {
-		
-		System.out.println("VIEW ALL QUOTATIONS");
-		System.out.println(String.format("%-10s %-30s %-10s %-10s %-20s\n", "REQUEST ID", "",
-				"", "",""));
-		
-	}
-	
 }
-
-
