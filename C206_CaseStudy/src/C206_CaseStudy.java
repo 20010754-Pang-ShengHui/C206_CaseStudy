@@ -11,20 +11,14 @@ public class C206_CaseStudy {
 	}
 
 	private static void start() {
-		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678","New"));
+		accList.add(new Account("PSH","Admin","1234@123.123.com","12345678"));
 		menuList();
 		Helper.line(50, "-");
 		int choice = Helper.readInt("Enter choice > ");
 		
 		while (choice!=3 && !memAuthen(loginUser,loginPassword)) {
 			if (choice==1) {
-				String username = Helper.readString("Username > ");
-				String role = Helper.readString("Role > ");
-				String email = Helper.readString("Email Address > ");
-				String Pw = Helper.readString("New Password > ");
-				String cPw = Helper.readString("Confirm Password > ");
-				String status = "New";
-				register(username,role,email,Pw,cPw,status);
+				addUser();
 			} else if (choice==2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
@@ -52,21 +46,6 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static boolean register(String un,String role,String email, String Pw, String cpw,String status) {
-		boolean success = false;
-		if (Pw.equals(cpw)) {
-			if (Pw.length()>=8) {
-				accList.add(new Account(un,role,email,Pw,"New"));
-				System.out.println("Registeration Successful!");
-				success = true;
-			} else if (Pw.length()<=8) {
-				System.out.println("Password must be atleast 8 characters and longers!\nRegistration Failed!");
-			}
-		} else {
-			System.out.println("Password does not match.\nRegistration Failed!");
-		}
-		return success;
-	}
 
 	private static boolean memAuthen(String username,String Pw) {
 		boolean success = false;
@@ -119,7 +98,7 @@ public class C206_CaseStudy {
 	private static void adminView() {
 		Helper.line(50, "-");
 		String output = "Home Page\n";
-		output += "1. Manage Customer\n";
+		output += "1. Manage Account\n";
 		output += "2. Manage Package\n";
 		output += "3. Manage Request for Quotation\n";
 		output += "4. Manage Quotation\n";
@@ -128,4 +107,35 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
+	private static void addUser() {
+		String name = Helper.readString("Enter name > ");
+		String role = Helper.readString("Enter role >");
+		String email = Helper.readString("Enter email >");
+		String password = Helper.readString("Enter password >");
+		
+		
+		Account acc  = new Account(name,role,email,password);
+		accList.add(acc);
+		
+	}
+	
+	private void viewUser() {
+		String output = "";
+		output += String.format("%-20s %-10s\n", "ITEM", "PRICE");
+	//	for (Item show : itemList) {
+	//		output += String.format("%-20s %-10.2f\n", wordProper(show.getType()), show.getPrice());
+	//	}
+		System.out.println(output);
+	
+	}
+	
+	private void delUser() {
+		String name = Helper.readString("Enter name to delete > ");
+	//	for (Item i : itemList) {
+	//		if (i.getPrice().equals lowest.getPrice()) {
+	//			remove
+//			}
+//		}
+		
+	}
 }

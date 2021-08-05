@@ -7,12 +7,12 @@ public class Account {
 	private String password;
 	private String status;
 	
-	public Account(String name, String role, String email, String password, String status) {
+	public Account(String name, String role, String email, String password) {
 		this.name = name;
 		this.role = role;
 		this.email = email;
 		this.password = password;
-		this.status = status;
+		this.status = "new";
 	}
 
 	public String getName() {
