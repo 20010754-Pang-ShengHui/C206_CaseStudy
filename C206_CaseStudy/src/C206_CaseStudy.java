@@ -117,6 +117,7 @@ public class C206_CaseStudy {
 		Account acc  = new Account(name,role,email,password);
 		accList.add(acc);
 		
+		
 	}
 	
 	private void viewUser() {

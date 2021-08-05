@@ -13,6 +13,7 @@ public class Account {
 		this.email = email;
 		this.password = password;
 		this.status = "new";
+		
 	}
 
 	public String getName() {
