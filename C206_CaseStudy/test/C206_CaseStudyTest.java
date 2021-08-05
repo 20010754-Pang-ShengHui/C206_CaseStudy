@@ -23,7 +23,7 @@ public class C206_CaseStudyTest {
 		assertTrue("C206_CaseStudy_SampleTest ", true);
 
 	}
-	@Test
+	
 	public void addUserTest() {
 		// Item list is not null, so that can add a new item - boundary
 	
@@ -41,7 +41,7 @@ public class C206_CaseStudyTest {
 		assertSame("Check that account is added", acc2, accListTest.get(1));
 
 	}
-	@Test
+	
 	public void viewUserTest () {
 		// Test if Item list is not null but empty -boundary
 
@@ -64,7 +64,7 @@ public class C206_CaseStudyTest {
 		assertEquals("Test that ViewAllUserList", testOutput, allUser);
 		
 	}
-	@Test
+	
 	public void delUserTest () {
 		C206_CaseStudy.addUser(accListTest, acc1);
 		C206_CaseStudy.addUser(accListTest, acc2);
