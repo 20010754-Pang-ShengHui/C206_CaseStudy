@@ -33,6 +33,11 @@ public class AdminPackageMain extends AdminPackage{
 		else if (choice == 2) {
 			AdminPackageMain.viewAllPackages(PackageList);
 		}
+		else if (choice == 3) {
+			AdminPackageMain.deletePackages(PackageList);
+		}else {
+			System.out.println("Invalid Number.");
+		}
 		}
 	
 //Option 1 Add Package
@@ -82,7 +87,34 @@ public class AdminPackageMain extends AdminPackage{
 	}
 	
 	//Option 3 Delete Package
-	//d
+	private static void deletePackages(ArrayList<AdminPackage> PackageList) {
+	int DeleteByCode = Helper.readInt("Enter Package by code to delete");
+	char yn = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
+	if (yn == 'Y' || yn == 'y') {
+		for (int i = 0 ; i< PackageList.size(); i++) {
+			AdminPackage a = PackageList.get(i);
+			if (i== DeleteByCode) {
+				PackageList.remove(a);
+				System.out.println("Package has been successfully deleted!");
+				break;
+				
+			}
+		
+		else if(yn == 'n' || yn == 'N'){
+				System.out.println("Deletion Cancelled!");
+				System.out.println("Going back...");
+				try {
+					Thread.sleep(500);
+				} catch(Exception e) { 
+			System.out.println(e);
+		}
+	}else{
+		Helper.line(70, "-");
+		System.out.println("There are no Appointment made at the moment.");
+	}
+	}
 	
+}
+	}
 }
 
