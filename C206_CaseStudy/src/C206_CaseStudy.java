@@ -70,7 +70,7 @@ public class C206_CaseStudy {
 
 	private static void memberhome(String username, String role) {
 		if (role.equals("Member")) {
-<<<<<<< HEAD
+
 			Helper.line(50, "-");
 			String output = "Login/Signup Page\n";
 			output += "1. Visitor Account Registration\n";
@@ -91,10 +91,10 @@ public class C206_CaseStudy {
 				}
 			}
 			
-=======
+
 			menuList();
 
->>>>>>> branch 'master' of https://github.com/20010754-Pang-ShengHui/C206_CaseStudy.git
+
 		} else if (role.trim().equals("Admin".trim())) {
 			int choice = -1;
 			while (choice != 6) {
