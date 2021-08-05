@@ -7,7 +7,6 @@ public class C206_CaseStudy {
 	private static String loginPassword;
 	private static String rl;
 
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		start();
@@ -15,8 +14,8 @@ public class C206_CaseStudy {
 
 	private static void start() {
 
-		accList.add(new Account("PSH", "Admin", "1234@123com", "12345678", 87654321));
-		
+		accList.add(new Account("PSH", "Admin", "1234@123com", "123", 87654321));
+
 		int choice = -1;
 		while (choice != 3 && !memAuthen(loginUser, loginPassword)) {
 			menuList();
@@ -62,10 +61,7 @@ public class C206_CaseStudy {
 				System.out.println("Authentication Success!");
 				success = true;
 				break;
-			}
-			else {
-				System.out.println("Wrong Password or Username");
-			}
+			} 
 		}
 		return success;
 	}
@@ -79,19 +75,17 @@ public class C206_CaseStudy {
 			output += "3. Quit";
 			System.out.println(output);
 			int choice = -1;
-			while (choice!=6) {
-			adminView();
-			choice = Helper.readInt("Enter choice > ");
-				if (choice==4) {
+			while (choice != 6) {
+				adminView();
+				choice = Helper.readInt("Enter choice > ");
+				if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
-				}
-				else if (choice==5) {
-					AppointmentMain.start(username,rl);
+				} else if (choice == 5) {
+					AppointmentMain.start(username, rl);
 					break;
 				}
 			}
-			
 
 			menuList();
 
@@ -100,31 +94,33 @@ public class C206_CaseStudy {
 			while (choice != 6) {
 				adminView();
 				choice = Helper.readInt("Enter choice > ");
-				if(choice == 1) {
+				if (choice == 1) {
 					subOption1();
 					choice = Helper.readInt("Enter choice > ");
-					if(choice == 1) {
-						Account acc = inputUser();
+					if (choice == 1) {
+						Account acc = inputUserAcc();
 						C206_CaseStudy.addUser(accList, acc);
-					}else if(choice == 2) {
-					//	viewUser();
-					}else if(choice == 3) {
-					//	delUser();
+					} else if (choice == 2) {
+						String table = viewUser(accList);
+						System.out.print(table);
+					} else if (choice == 3) {
+						String name = inputUserDel();
+						C206_CaseStudy.delUser(accList, name);
 					}
-				}else if(choice == 2) {
-					
-				}else if(choice == 3) {
-					
-				}else if (choice == 4) {
+				} else if (choice == 2) {
+
+				} else if (choice == 3) {
+
+				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
 				} else if (choice == 5) {
 					AppointmentMain.start(username, rl);
 					break;
-				}else {
+				} else {
 					System.out.println("invalid");
 				}
-				
+
 			}
 
 		} else if (role.trim().equals("Designer".trim())) {
@@ -160,6 +156,7 @@ public class C206_CaseStudy {
 		output += "6. Quit";
 		System.out.println(output);
 	}
+
 	private static void subOption1() {
 		Helper.line(50, "-");
 		String output = "";
@@ -169,38 +166,37 @@ public class C206_CaseStudy {
 		output += "4. Quit";
 		System.out.println(output);
 	}
-	
-	public static Account inputUser() {
-		
+
+	public static Account inputUserAcc() {
 		String name = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role >");
 		int contact = Helper.readInt("Enter contact number >");
 		String email = Helper.readString("Enter email >");
 		String password = Helper.readString("Enter password >");
+		
 		if (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
 			System.out.println("Please fill in all the neccessary field");
 		} 
 
 		Account acc = new Account(name, role, email, password, contact);
-
 		return acc;
 		
 	}
-	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
-		accList.add(acc1);
 
+	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
+		accListTest.add(acc1);
 
 	}
 
 	public static String viewUser(ArrayList<Account> accListTest) {
 		String output = "";
-		if (accList.isEmpty()) {
+		if (accListTest.isEmpty()) {
 			output = "No users found";
 
 		} else {
-			output += String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT");
-			for (Account show : accList) {
-				output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(),
+			System.out.print(String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT"));
+			for (Account show : accListTest) {
+				 output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(),
 						show.getContact());
 			}
 		}
@@ -208,16 +204,23 @@ public class C206_CaseStudy {
 
 	}
 
-	public static String delUser(ArrayList<Account> accListTest, Account acc2) {
+	public static String inputUserDel() {
 		String name = Helper.readString("Enter name to delete > ");
-		String nameConfirm  = ""; 
-		for (Account i : accList) {
+		return name;
+	}
+
+	public static String delUser(ArrayList<Account> accListTest, String name) {
+		String output = "";
+		for (Account i : accListTest) {
 			if (i.getName().equalsIgnoreCase(name)) {
-				accList.remove(i);
-				System.out.println(name + " has been successfully deleted");
+				accListTest.remove(i);
+				output = name + " has been successfully deleted";
 				break;
 			}
+			else {
+				output = "No user with that name is found";
+			}
 		}
-		return nameConfirm;
+		return output;
 	}
 }
