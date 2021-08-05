@@ -73,6 +73,19 @@ public class C206_CaseStudy {
 			output += "2. Login\n";
 			output += "3. Quit";
 			System.out.println(output);
+			int choice = -1;
+			while (choice!=6) {
+			adminView();
+			choice = Helper.readInt("Enter choice > ");
+				if (choice==4) {
+					QuotationMain.start(username, rl);
+					break;
+				}
+				else if (choice==5) {
+					AppointmentMain.start(username,rl);
+					break;
+				}
+			}
 			
 		} else if (role.trim().equals("Admin".trim())) {
 			int choice = -1;
