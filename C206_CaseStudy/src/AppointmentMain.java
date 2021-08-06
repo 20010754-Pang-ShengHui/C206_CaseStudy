@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -35,10 +36,19 @@ public class AppointmentMain {
 				String time = Helper.readString("Enter time in 24Hrs (HH:MM) > ");
 				String dName = Helper.readString("Enter Designer Name > ");
 				String addr = Helper.readString("Enter Address > ");
-				LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
-				LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
-				Appointment apt = new Appointment(usN, lcDate,lcTime, dName, addr);
-				addApt(apptList,apt);
+				
+				boolean matchDate = Pattern.matches("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$",date);
+				boolean matchTime = Pattern.matches("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$",time);
+				if (matchTime && matchDate) {
+					LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
+					LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
+					Appointment apt = new Appointment(usN, lcDate,lcTime, dName, addr);
+					addApt(apptList,apt);					
+				}
+				else {
+					System.out.println("Invalid Date and Time entered!");
+				}
+				
 			}
 			else if (choice==2) {
 				viewApt();
@@ -112,9 +122,14 @@ public class AppointmentMain {
 						Appointment a = apptList.get(i);
 						if (cApt==i) {
 							String date = Helper.readString("Enter new date (DD/MM/YYYY) > ");
-							LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
-							cDate(apptList,a,lcDate);
-							break;
+							boolean matchDate = Pattern.matches("^(0?[1-9]|[12][0-9]|3[01])[\\/\\-](0?[1-9]|1[012])[\\/\\-]\\d{4}$",date);
+							if (matchDate) {
+								LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
+								cDate(apptList,a,lcDate);
+								break;
+							} else {
+								System.out.println("Invalid Date entered!");
+							}
 						}
 					}
 					System.out.println("Date is successfully changed!");
@@ -124,9 +139,14 @@ public class AppointmentMain {
 						Appointment a = apptList.get(i);
 						if (cApt==i) {
 							String time = Helper.readString("Enter new time in 24Hrs (HH:MM) > ");
-							LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
-							cTime(apptList,a,lcTime);
-							break;
+							boolean matchTime = Pattern.matches("^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$",time);
+							if (matchTime) {
+								LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
+								cTime(apptList,a,lcTime);
+								break;
+							} else {
+								System.out.println("Invalid Time entered!");
+							}
 						}
 					}
 					System.out.println("Time is successfully changed!");
@@ -155,7 +175,7 @@ public class AppointmentMain {
 	public static void cDate(ArrayList<Appointment> apptList,Appointment a,LocalDate lcd) {
 		for (int i = 0;i<apptList.size();i++) {
 			if (apptList.get(i)==a) {
-				a.setDoA(lcd);
+					a.setDoA(lcd);
 			}
 		}
 	}
