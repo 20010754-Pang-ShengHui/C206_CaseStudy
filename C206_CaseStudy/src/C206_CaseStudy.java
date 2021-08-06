@@ -110,7 +110,7 @@ public class C206_CaseStudy {
 						System.out.print(table);
 					} else if (choice == 3) {
 						String name = inputUserDel();
-						String msg = C206_CaseStudy.delUser(accList, name);
+						String msg = delUser(accList, name);
 						System.out.println(msg);
 					}
 				} else if (choice == 2) {
