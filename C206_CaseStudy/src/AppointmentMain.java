@@ -77,28 +77,35 @@ public class AppointmentMain {
 		System.out.println("Appointment Added!");
 	}
 	
-	public static void viewApt() {
-		if (!apptList.isEmpty()) {
-			String o = String.format(
-					"%-4s %-10s %-13s %-15s %-10s %s\n",
-					"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
-			o+="-------------------------------------------------------------------------------------------------------------------------\n";
-			o+=retrieveAllAppointments(apptList);
-			System.out.println(o);
-		} else { 
-			Helper.line(70, "-");
-			System.out.println("There are no Appointments made at the moment.");
-		}
-		
-	}
-
 	public static String retrieveAllAppointments(ArrayList<Appointment> aptList) {
 		String o = "";
 		for (int i = 0;i<apptList.size();i++) {
 			Appointment a = apptList.get(i);
-			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
+			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",
+					i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress()
+					);
 		}
 		return o;
+	}
+	
+	public static void coviewApt() {
+		String o = String.format(
+				"%-4s %-10s %-13s %-15s %-10s %s\n",
+				"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
+		o+=retrieveAllAppointments(apptList);
+		System.out.println(o);
+		
+	}
+	
+	public static void viewApt() {
+		if (!apptList.isEmpty()) {
+			coviewApt();
+		}
+		else { 
+			Helper.line(70, "-");
+			System.out.println("There are no Appointments made at the moment.");
+		}
+		
 	}
 	
 	private static void changeApt() {
