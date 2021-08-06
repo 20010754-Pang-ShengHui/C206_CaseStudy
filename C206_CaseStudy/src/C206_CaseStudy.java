@@ -14,15 +14,16 @@ public class C206_CaseStudy {
 
 	private static void start() {
 
-		accList.add(new Account("PSH", "Admin", "1234@123com", "12345678", 87654321));
-		accList.add(new Account("dous", "Customer", "1234@123com", "douss", 87654321));
+		accList.add(new Account("PSH", "Admin", "1234@123com", "123", 87654321));
+
 		int choice = -1;
 		while (choice != 3) {
 			menuList();
 			Helper.line(50, "-");
 			choice = Helper.readInt("Enter choice > ");
 			if (choice == 1) {
-				addUser();
+				Account acc = inputUserAcc();
+				C206_CaseStudy.addUser(accList, acc);
 			} else if (choice == 2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
@@ -36,6 +37,7 @@ public class C206_CaseStudy {
 		}
 		if (choice == 3) {
 			System.out.println("Bye!");
+			System.out.println("Test");
 		}
 
 	}
@@ -61,32 +63,26 @@ public class C206_CaseStudy {
 				success = true;
 				break;
 			}
-			else {
-				System.out.println("Wrong Password or Username");
-			}
 		}
 		return success;
 	}
 
 	private static void memberhome(String username, String role) {
-		if (role.equals("Member")) {
+		if (role.trim().equals("Member".trim())) {
 			Helper.line(50, "-");
-			String output = "Login/Signup Page\n";
-			output += "1. Visitor Account Registration\n";
-			output += "2. Login\n";
+			String output = "Home Page\n";
+			output += "1. Request for Quotation\n";
+			output += "2. Manage Appointment\n";
 			output += "3. Quit";
 			System.out.println(output);
 			int choice = -1;
-			while (choice!=6) {
-			adminView();
-			choice = Helper.readInt("Enter choice > ");
-				if (choice==4) {
-					QuotationMain.start(username, rl);
-					break;
-				}
-				else if (choice==5) {
-					AppointmentMain.start(username,rl);
-					break;
+			while (choice != 3) {
+				adminView();
+				choice = Helper.readInt("Enter choice > ");
+				if (choice == 2) {
+
+				} else if (choice == 3) {
+
 				}
 			}
 			
@@ -97,30 +93,34 @@ public class C206_CaseStudy {
 			while (choice != 6) {
 				adminView();
 				choice = Helper.readInt("Enter choice > ");
-				if(choice == 1) {
+				if (choice == 1) {
 					subOption1();
 					choice = Helper.readInt("Enter choice > ");
-					if(choice == 1) {
-						addUser();
-					}else if(choice == 2) {
-						viewUser();
-					}else if(choice == 3) {
-						delUser();
+					if (choice == 1) {
+						Account acc = inputUserAcc();
+						C206_CaseStudy.addUser(accList, acc);
+					} else if (choice == 2) {
+						String table = viewUser(accList);
+						System.out.print(table);
+					} else if (choice == 3) {
+						String name = inputUserDel();
+						String msg = C206_CaseStudy.delUser(accList, name);
+						System.out.println(msg);
 					}
-				}else if(choice == 2) {
-					
-				}else if(choice == 3) {
-					
-				}else if (choice == 4) {
+				} else if (choice == 2) {
+
+				} else if (choice == 3) {
+
+				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
 				} else if (choice == 5) {
 					AppointmentMain.start(username, rl);
 					break;
-				}else {
+				} else {
 					System.out.println("invalid");
 				}
-				
+
 			}
 
 		} else if (role.trim().equals("Designer".trim())) {
@@ -156,6 +156,7 @@ public class C206_CaseStudy {
 		output += "6. Quit";
 		System.out.println(output);
 	}
+
 	private static void subOption1() {
 		Helper.line(50, "-");
 		String output = "";
@@ -166,47 +167,65 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	private static void addUser() {
+	public static Account inputUserAcc() {
+		Account acc = null;
 		String name = Helper.readString("Enter name > ");
-		String role = Helper.readString("Enter role >");
+		String role = Helper.readString("Enter role (Admin/Member/Designer) > ");
 		int contact = Helper.readInt("Enter contact number >");
 		String email = Helper.readString("Enter email >");
 		String password = Helper.readString("Enter password >");
 
-		if (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
+		while (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
 			System.out.println("Please fill in all the neccessary field");
-		} else {
-			Account acc = new Account(name, role, email, password, contact);
-			accList.add(acc);
+			name = Helper.readString("Enter name > ");
+			role = Helper.readString("Enter role (Admin/Member/Designer) > ");
+			contact = Helper.readInt("Enter contact number >");
+			email = Helper.readString("Enter email >");
+			password = Helper.readString("Enter password >");
 		}
+
+		acc = new Account(name, role, email, password, contact);
+		return acc;
+	}
+
+	public static void addUser(ArrayList<Account> accListTest, Account acc1) {
+		accListTest.add(acc1);
+		System.out.println("Account successfully created");
 
 	}
 
-	private static void viewUser() {
+	public static String viewUser(ArrayList<Account> accListTest) {
 		String output = "";
-		if (accList.isEmpty()) {
-			output = "No users found";
+		if (accListTest.isEmpty()) {
+			output = "No users found\n";
 
 		} else {
-			output += String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT");
-			for (Account show : accList) {
+			System.out.print(String.format("%-20s %-10s %-20s %-10s\n", "NAME", "ROLE", "EMAIL", "CONTACT"));
+			for (Account show : accListTest) {
 				output += String.format("%-20s %-10s %-20s %-10s\n", show.getName(), show.getRole(), show.getEmail(),
 						show.getContact());
 			}
 		}
-		System.out.println(output);
+		return output;
 
 	}
 
-	private static void delUser() {
+	public static String inputUserDel() {
 		String name = Helper.readString("Enter name to delete > ");
-		for (Account i : accList) {
+		return name;
+	}
+
+	public static String delUser(ArrayList<Account> accListTest, String name) {
+		String output = "";
+		for (Account i : accListTest) {
 			if (i.getName().equalsIgnoreCase(name)) {
-				accList.remove(i);
-				System.out.println(name + " has been successfully deleted");
+				accListTest.remove(i);
+				output = name + " has been successfully deleted";
 				break;
+			} else {
+				output = "No user with that name is found";
 			}
 		}
-
+		return output;
 	}
 }

@@ -55,6 +55,8 @@ public class AdminPackage {
 		public void setPackAmt(int packAmt) {
 			PackAmt = packAmt;
 		}
+
+		 
 }
 
 	
