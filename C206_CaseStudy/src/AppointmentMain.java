@@ -18,13 +18,6 @@ public class AppointmentMain {
 	
 	public static void start(String un,String role) {
 		int choice = -1;
-		LocalDate lDate = LocalDate.parse("05/08/2020",DateTimeFormatter.ofPattern("d/MM/yyyy"));
-		LocalTime lTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("H:mm"));
-		Appointment apt1 = new Appointment("PSH", lDate, lTime, "John", "Singapore");
-		Appointment apt2 = new Appointment("Test2", lDate, lTime, "John", "Singapore");
-		apptList.add(apt1);
-		apptList.add(apt2);
-		
 		while (choice!=5) {
 			Helper.line(70, "-");
 			String output = "Appointment Page\n";
