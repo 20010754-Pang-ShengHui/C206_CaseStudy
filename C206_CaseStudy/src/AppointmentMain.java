@@ -19,6 +19,12 @@ public class AppointmentMain {
 	
 	public static void start(String un,String role) {
 		int choice = -1;
+		LocalDate lDate = LocalDate.parse("05/08/2020",DateTimeFormatter.ofPattern("d/MM/yyyy"));
+		LocalTime lTime = LocalTime.parse("23:59", DateTimeFormatter.ofPattern("H:mm"));
+		Appointment apt1 = new Appointment("PSH", lDate, lTime, "John", "Singapore");
+		Appointment apt2 = new Appointment("Test2", lDate, lTime, "John", "Singapore");
+		apptList.add(apt1);
+		apptList.add(apt2);
 		
 		while (choice!=5) {
 			Helper.line(70, "-");
@@ -61,22 +67,29 @@ public class AppointmentMain {
 		aptList.add(apt);
 		System.out.println("Appointment Added!");
 	}
-	private static void viewApt() {
+	
+	public static void viewApt() {
 		if (!apptList.isEmpty()) {
 			String o = String.format(
 					"%-4s %-10s %-13s %-15s %-10s %s\n",
 					"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
 			o+="-------------------------------------------------------------------------------------------------------------------------\n";
-			for (int i = 0;i<apptList.size();i++) {
-				Appointment a = apptList.get(i);
-				o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
-			}
+			o+=retrieveAllAppointments(apptList);
 			System.out.println(o);
-		} else {
+		} else { 
 			Helper.line(70, "-");
 			System.out.println("There are no Appointments made at the moment.");
 		}
 		
+	}
+
+	public static String retrieveAllAppointments(ArrayList<Appointment> aptList) {
+		String o = "";
+		for (int i = 0;i<apptList.size();i++) {
+			Appointment a = apptList.get(i);
+			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress());
+		}
+		return o;
 	}
 	
 	private static void changeApt() {
