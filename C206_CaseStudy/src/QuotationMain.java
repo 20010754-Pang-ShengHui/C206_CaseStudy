@@ -85,6 +85,8 @@ public class QuotationMain {
 			        if (delquote == q.getQuotid()) {
 				        quoteList.remove(q);
 				        System.out.println("Your Quotation is successfully deleted!");
+				        break;
+				        
 			        } else {
 			        	System.out.println("Quotation ID not found!");
 			        }
