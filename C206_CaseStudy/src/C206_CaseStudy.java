@@ -21,13 +21,20 @@ public class C206_CaseStudy {
 			choice = Helper.readInt("Enter choice > ");
 			if (choice == 1) {
 				Account acc = inputUserAcc();
-				C206_CaseStudy.addUser(accList, acc);
+				if (acc!=null) {
+					C206_CaseStudy.addUser(accList, acc);
+				}
+				else {
+					System.out.println("Invalid Role Entered!");
+				}
 			} else if (choice == 2) {
 				String username = Helper.readString("Username > ");
 				String Pw = Helper.readString("Password > ");
 				if (memAuthen(username, Pw)) {
 					memberhome(username, rl);
-				}
+				} else {
+				System.out.println("Invalid Username & Password!");
+			}
 
 			} else if (choice > 3 || choice < 1) {
 				System.out.println("Invalid Choice!");
@@ -35,7 +42,6 @@ public class C206_CaseStudy {
 		}
 		if (choice == 3) {
 			System.out.println("Bye!");
-			System.out.println("Test");
 		}
 
 	}
@@ -53,7 +59,8 @@ public class C206_CaseStudy {
 		boolean success = false;
 		for (int i = 0; i < accList.size(); i++) {
 			Account a = accList.get(i);
-			if (a.getName().equals(username) && a.getPassword().equals(Pw)) {
+			if (a.getName().equals(username) && a.getPassword().equals(Pw) &&
+					a.getRole().equals("Member") || a.getRole().equals("Admin") || a.getRole().equals("Designer")) {
 				loginUser = username;
 				loginPassword = Pw;
 				rl = a.getRole();
@@ -62,7 +69,7 @@ public class C206_CaseStudy {
 				break;
 			}
 			else {
-				System.out.println("Invalid Username & Password!");
+				success = false;
 			}
 		}
 		return success;
@@ -114,7 +121,12 @@ public class C206_CaseStudy {
 					choice = Helper.readInt("Enter choice > ");
 					if (choice == 1) {
 						Account acc = inputUserAcc();
-						C206_CaseStudy.addUser(accList, acc);
+						if (acc!=null) {
+							C206_CaseStudy.addUser(accList, acc);
+						}
+						else {
+							System.out.println("Invalid Role Entered!");
+						}
 					} else if (choice == 2) {
 						String table = viewUser(accList);
 						System.out.print(table);
@@ -134,19 +146,19 @@ public class C206_CaseStudy {
 				} else if (choice == 5) {
 					AppointmentMain.start(username, rl);
 					break;
-				} else {
+				} else if (choice > 6 || choice <0){
 					System.out.println("invalid");
 				}
-				System.out.println("Logging out...");
-				try {
-					Thread.sleep(1000);
-		         } catch (Exception e) {
-		            System.out.println(e);
-		         }
-				System.out.println("Bye!");
-				System.exit(1);
 
 			}
+			System.out.println("Logging out...");
+			try {
+				Thread.sleep(1000);
+	         } catch (Exception e) {
+	            System.out.println(e);
+	         }
+			System.out.println("Bye!");
+			System.exit(1);
 
 		} else if (role.trim().equals("Designer".trim())) {
 //		output += "1. Manage Quotation\n";
@@ -221,8 +233,13 @@ public class C206_CaseStudy {
 			email = Helper.readString("Enter email >");
 			password = Helper.readString("Enter password >");
 		}
-
-		acc = new Account(name, role, email, password, contact);
+			if (role.equals("Admin") || role.equals("Member") || role.equals("Designer")) {
+				acc = new Account(name, role, email, password, contact);
+				
+			}
+			else {
+				acc = null;
+			}
 		return acc;
 	}
 
