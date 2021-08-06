@@ -39,7 +39,50 @@ public class AppointmentMainTest {
 		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
 
 	}
+
+	@Test
+	public void deleteAppointment() {
+		
+		assertNotNull("Check if there are any values in the Appointment List",apptList);
+		
+		AppointmentMain.addApt(apptList,apt1);
+		assertEquals("Check whether the Appointment List is 1", 1,apptList.size());
+		assertSame("Check whether apt1 is added",apt1,apptList.get(0));
+		
+		AppointmentMain.addApt(apptList,apt2);
+		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
+		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
+		System.out.println(apptList.size());
+
+		AppointmentMain.cDelapt(apptList, apt1);
+		assertEquals("Check whether the Appointment List is 1", 1,apptList.size());
+		assertNotSame("Check whether apt1 is added",apt1,apptList.get(0));
+		
+		
+		AppointmentMain.cDelapt(apptList, apt2);
+		assertEquals("Check whether the Appointment List is 1", 0,apptList.size());
+		System.out.println("test"+apptList.size());
+	}
 	
+	@Test
+	public void changeAppointment() {
+		
+		assertNotNull("Check if there are any values in the Appointment List",apptList);
+		
+		AppointmentMain.addApt(apptList,apt1);
+		assertEquals("Check whether the Appointment List is 1", 1,apptList.size());
+		assertSame("Check whether apt1 is added",apt1,apptList.get(0));
+		
+		AppointmentMain.addApt(apptList,apt2);
+		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
+		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
+
+		AppointmentMain.cDate(apptList,apt1,lcDate);
+		assertSame("Check whether the time changed matches the Appointment List",lcDate, apptList.get(0).getDoA());
+		
+		AppointmentMain.cTime(apptList,apt1,lcTime);
+		assertSame("Check whether the time changed matches the Appointment List",lcTime, apptList.get(0).getToA());
+	}
 	
 	@After
 	public void tearDown() throws Exception {

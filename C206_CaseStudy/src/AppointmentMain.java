@@ -61,7 +61,7 @@ public class AppointmentMain {
 		aptList.add(apt);
 		System.out.println("Appointment Added!");
 	}
-	public static void viewApt() {
+	private static void viewApt() {
 		if (!apptList.isEmpty()) {
 			String o = String.format(
 					"%-4s %-10s %-13s %-15s %-10s %s\n",
@@ -79,7 +79,7 @@ public class AppointmentMain {
 		
 	}
 	
-	public static void changeApt() {
+	private static void changeApt() {
 
 		if (!apptList.isEmpty()) {
 			viewApt();
@@ -101,7 +101,7 @@ public class AppointmentMain {
 						if (cApt==i) {
 							String date = Helper.readString("Enter new date (DD/MM/YYYY) > ");
 							LocalDate lcDate = LocalDate.parse(date,DateTimeFormatter.ofPattern("d/MM/yyyy"));
-							a.setDoA(lcDate);
+							cDate(apptList,a,lcDate);
 							break;
 						}
 					}
@@ -113,7 +113,7 @@ public class AppointmentMain {
 						if (cApt==i) {
 							String time = Helper.readString("Enter new time in 24Hrs (HH:MM) > ");
 							LocalTime lcTime = LocalTime.parse(time, DateTimeFormatter.ofPattern("H:mm"));
-							a.setToA(lcTime);
+							cTime(apptList,a,lcTime);
 							break;
 						}
 					}
@@ -140,7 +140,23 @@ public class AppointmentMain {
 		}
 	}
 	
-	public static void deleteApt() {
+	public static void cDate(ArrayList<Appointment> apptList,Appointment a,LocalDate lcd) {
+		for (int i = 0;i<apptList.size();i++) {
+			if (apptList.get(i)==a) {
+				a.setDoA(lcd);
+			}
+		}
+	}
+
+	public static void cTime(ArrayList<Appointment> apptList,Appointment a,LocalTime lct) {
+		for (int i = 0;i<apptList.size();i++) {
+			if (apptList.get(i)==a) {
+				a.setToA(lct);
+			}
+		}
+	}
+	
+	private static void deleteApt() {
 		if (!apptList.isEmpty()) {
 			viewApt();
 			int dApt = (Helper.readInt("Appointment no. > ")-1);
@@ -149,7 +165,7 @@ public class AppointmentMain {
 				for (int i = 0;i<apptList.size();i++) {
 					Appointment a = apptList.get(i);
 					if (i==dApt) {
-						apptList.remove(i);
+						cDelapt(apptList,a);
 						System.out.println("Your Appointment is successfully deleted!");
 						break;
 					}
@@ -168,6 +184,15 @@ public class AppointmentMain {
 			Helper.line(70, "-");
 			System.out.println("There are no Appointments made at the moment.");
 		
+		}
+	}
+	
+	public static void cDelapt(ArrayList<Appointment> apptList,Appointment a) {
+		for (int i = 0;i<apptList.size();i++) {
+			if (apptList.get(i)==a) {
+				apptList.remove(a);
+			}
+			
 		}
 	}
 }
