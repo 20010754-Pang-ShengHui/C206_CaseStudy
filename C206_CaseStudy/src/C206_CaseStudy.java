@@ -61,6 +61,9 @@ public class C206_CaseStudy {
 				success = true;
 				break;
 			}
+			else {
+				System.out.println("Invalid Username & Password!");
+			}
 		}
 		return success;
 	}
@@ -73,13 +76,20 @@ public class C206_CaseStudy {
 				String output = "Home Page\n";
 				output += "1. Request for Quotation\n";
 				output += "2. Manage Appointment\n";
-				output += "3. Quit";
+				output += "3. Logout & Quit";
 				System.out.println(output);
 				choice = Helper.readInt("Enter choice > ");
 				if (choice == 2) {
 
 				} else if (choice == 3) {
-
+					System.out.println("Logging out...");
+					try {
+						Thread.sleep(1000);
+			         } catch (Exception e) {
+			            System.out.println(e);
+			         }
+					System.out.println("Bye!");
+					System.exit(1);
 				}
 			}
 			
@@ -117,6 +127,7 @@ public class C206_CaseStudy {
 					AdminPackageMain.start(username, rl);
 
 				} else if (choice == 3) {
+					//Ethan add request quotation main here
 				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
@@ -126,10 +137,20 @@ public class C206_CaseStudy {
 				} else {
 					System.out.println("invalid");
 				}
+				System.out.println("Logging out...");
+				try {
+					Thread.sleep(1000);
+		         } catch (Exception e) {
+		            System.out.println(e);
+		         }
+				System.out.println("Bye!");
+				System.exit(1);
 
 			}
 
 		} else if (role.trim().equals("Designer".trim())) {
+//		output += "1. Manage Quotation\n";
+//		output += "2. Quit";
 			int choice = -1;
 			while (choice != 2) {
 				designerView();
@@ -139,6 +160,16 @@ public class C206_CaseStudy {
 					break;
 				}
 			}
+			if (choice==2) {
+				System.out.println("Logging out...");
+				try {
+					Thread.sleep(1000);
+		         } catch (Exception e) {
+		            System.out.println(e);
+		         }
+				System.out.println("Bye!");
+				System.exit(1);
+			}
 
 		}
 	}
@@ -147,7 +178,7 @@ public class C206_CaseStudy {
 		Helper.line(50, "-");
 		String output = "Home Page\n";
 		output += "1. Manage Quotation\n";
-		output += "2. Quit";
+		output += "2. Logout & Quit";
 		System.out.println(output);
 	}
 
@@ -159,7 +190,7 @@ public class C206_CaseStudy {
 		output += "3. Manage Request for Quotation\n";
 		output += "4. Manage Quotation\n";
 		output += "5. Manage Appointment\n";
-		output += "6. Quit";
+		output += "6. Logout & Quit";
 		System.out.println(output);
 	}
 
@@ -192,7 +223,6 @@ public class C206_CaseStudy {
 		}
 
 		acc = new Account(name, role, email, password, contact);
-		System.out.println(acc.getRole());
 		return acc;
 	}
 

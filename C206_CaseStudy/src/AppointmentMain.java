@@ -32,7 +32,7 @@ public class AppointmentMain {
 			output += "2. View Appointment\n";
 			output += "3. Change Appointment\n";
 			output += "4. Delete Appointment\n";
-			output += "5. Quit";
+			output += "5. Logout& Quit";
 			System.out.println(output);
 			choice = Helper.readInt("Enter choice > ");
 			if (choice==1) {
@@ -56,6 +56,12 @@ public class AppointmentMain {
 			}
 		}
 		if (choice==5) {
+			System.out.println("Logging out...");
+			try {
+				Thread.sleep(1000);
+	         } catch (Exception e) {
+	            System.out.println(e);
+	         }
 			System.out.println("Bye!");
 			System.exit(0);
 		}
