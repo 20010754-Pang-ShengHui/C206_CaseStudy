@@ -103,15 +103,6 @@ public class C206_CaseStudy {
 			menuList();
 
 		} else if (role.trim().equals("Admin".trim())) {
-			//		Helper.line(50, "-");
-			//		String output = "Home Page\n";
-			//		output += "1. Manage Account\n";
-			//		output += "2. Manage Package\n";
-			//		output += "3. Manage Request for Quotation\n";
-			//		output += "4. Manage Quotation\n";
-			//		output += "5. Manage Appointment\n";
-			//		output += "6. Quit";
-			//		System.out.println(output);
 			int choice = -1;
 			while (choice != 6) {
 				adminView();
@@ -139,7 +130,7 @@ public class C206_CaseStudy {
 					AdminPackageMain.start(username, rl);
 
 				} else if (choice == 3) {
-					//Ethan add request quotation main here
+					requestquoteMain.start(username, role);
 				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
@@ -161,8 +152,6 @@ public class C206_CaseStudy {
 			System.exit(1);
 
 		} else if (role.trim().equals("Designer".trim())) {
-//		output += "1. Manage Quotation\n";
-//		output += "2. Quit";
 			int choice = -1;
 			while (choice != 2) {
 				designerView();

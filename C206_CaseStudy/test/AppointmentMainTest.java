@@ -40,32 +40,31 @@ public class AppointmentMainTest {
 
 	}
 
-//	@Test
-//	public void retrieveandviewAppts() {
-//		
-//		assertNotNull("Check if there are any values in the Appointment List",apptList);
-//		
-//		String allApts = AppointmentMain.retrieveAllAppointments(apptList);
-//		String test = "";
-//		assertEquals("Check viewApt", test,allApts);
-//		
-//		AppointmentMain.addApt(apptList,apt1);
-//		AppointmentMain.addApt(apptList,apt2);
-//		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
-//		
-//		allApts = AppointmentMain.retrieveAllAppointments(apptList);
-//		test =String.format(
-//				"%-4s %-10s %-13s %-15s %-10s %s\n",
-//				"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
-//		test+="-------------------------------------------------------------------------------------------------------------------------\n";
-//		test+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",1,"PSH", lcDate, lcTime, "John", "Singapore");
-//		test+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",2,"Test2", lcDate, lcTime, "John", "Singapore");
-//		
-//		
-//		assertEquals("Test viewApt", test,allApts);
-//		System.out.println(allApts);
-//
-//	}
+	@Test
+	public void retrieveandviewAppts() {
+		
+		assertNotNull("Check if there are any values in the Appointment List",apptList);
+		
+		String allApts = AppointmentMain.retrieveAllAppointments(apptList);
+		String test = "";
+		assertEquals("Check viewApt", test,allApts);
+		
+		AppointmentMain.addApt(apptList,apt1);
+		AppointmentMain.addApt(apptList,apt2);
+		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
+		
+		allApts = AppointmentMain.retrieveAllAppointments(apptList);
+		test =String.format(
+				"%-4s %-10s %-13s %-15s %-10s %s\n",
+				"No.","Username","Date-of-Appt","Time-of-Appt","Designer","Address");
+		test+="-------------------------------------------------------------------------------------------------------------------------\n";
+		test+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",1,"PSH", lcDate, lcTime, "John", "Singapore");
+		test+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",2,"Test2", lcDate, lcTime, "John", "Singapore");
+		
+		
+		assertEquals("Test viewApt", test,allApts);
+
+	}
 	
 	@Test
 	public void deleteAppointment() {
