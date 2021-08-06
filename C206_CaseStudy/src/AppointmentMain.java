@@ -205,6 +205,12 @@ public class AppointmentMain {
 					Appointment a = apptList.get(i);
 					if (i==dApt) {
 						cDelapt(apptList,a);
+						System.out.println("Deleting Appointment no. "+(dApt+1)+"...");
+						try {
+							Thread.sleep(1000);
+						} catch (Exception e) {
+							System.out.println(e);
+						}
 						System.out.println("Your Appointment is successfully deleted!");
 						break;
 					}
@@ -218,6 +224,8 @@ public class AppointmentMain {
 		         } catch (Exception e) {
 		            System.out.println(e);
 		         }
+			} else {
+				System.out.println("Invalid Input!");
 			}
 		} else {
 			Helper.line(70, "-");
@@ -227,11 +235,6 @@ public class AppointmentMain {
 	}
 	
 	public static void cDelapt(ArrayList<Appointment> apptList,Appointment a) {
-		for (int i = 0;i<apptList.size();i++) {
-			if (apptList.get(i)==a) {
-				apptList.remove(a);
-			}
-			
-		}
+		apptList.remove(a);
 	}
 }
