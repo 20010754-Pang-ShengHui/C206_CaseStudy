@@ -93,6 +93,7 @@ public class C206_CaseStudyTest {
 		assertSame("Test that account deleted  is account 1", delUser, delMsgErrorTest);
 
 	}
+	
 
 	@After
 	public void tearDown() throws Exception {

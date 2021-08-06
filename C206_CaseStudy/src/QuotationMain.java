@@ -27,7 +27,7 @@ public class QuotationMain {
 		
 	}
 	
-    public static void addQuotation() {
+    public static void addQuotation(ArrayList<Quotation> quoteList, Quotation q1) {
 		
 		int reqid = Helper.readInt("Enter Request ID: ");
 		int quotid = Helper.readInt("Enter Quotation ID:");
@@ -49,10 +49,16 @@ public class QuotationMain {
 		
 	}
 	
-	public static void viewQuotations() {
+	public static String viewQuotations(ArrayList<Quotation> quoteList) {
+		String output = "";
 		
-		if (!quoteList.isEmpty()) {
-		    System.out.println("VIEW ALL QUOTATIONS");
+		if (quoteList.isEmpty()) {
+			
+			Helper.line(70, "-");
+			output += "There are no Quotations currently."; 
+		  
+		} else {
+			 System.out.println("VIEW ALL QUOTATIONS");
 		    System.out.println(String.format("%-10s %-20s %-15s %-15s %-15s %-15s %-15s %-15s\n", "REQUEST ID", 
 				"QUOTATION ID", "CATEGORY", "DESCRIPTION", "PRICE", "DESIGNER NAME", "START DATE", 
 				"TOTAL AMOUNT"));
@@ -60,29 +66,34 @@ public class QuotationMain {
 		    for (int i = 0; i < quoteList.size(); i++) {
 			
 			    Quotation q = quoteList.get(i);
-			    System.out.println(String.format("%-10d %-15d %-15s %-15s %-15.2f %-15s %-15s %-15.2f\n", q.getReqid(), 
+			    output += String.format("%-10d %-15d %-15s %-15s %-15.2f %-15s %-15s %-15.2f\n", q.getReqid(), 
 					q.getQuotid(), q.getCateg(), q.getDescrip(), q.getPrice(), q.getDesname(), 
-					q.getStartdate(), q.getTotalamt()));
+					q.getStartdate(), q.getTotalamt());
+			
 		    }
-		} else {
-			Helper.line(70, "-");
-			System.out.println("There are no Quotations currently.");
 		}
+		return output;
 	}
 	
-	public static void deleteQuotation() {
+	
+	
+	
+	
+	public static int deleteQuotation(ArrayList<Quotation> quoteList, int qu) {
 		
 		if (!quoteList.isEmpty()) {
 			
-			viewQuotations();
-		    int delquote = Helper.readInt("Enter a Quotation ID to delete: ");
+			int delquote = Helper.readInt("Enter a Quotation ID to delete: ");
+		
+		    
 		    char yn = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
 		    
 		    if (yn=='Y' || yn=='y') {
 		        for (int i = 0; i < quoteList.size(); i++) {
 			
 			        Quotation q = quoteList.get(i);
-			        if (delquote == q.getQuotid()) {
+			        if ( delquote == q.getQuotid()) {       	
+			 
 				        quoteList.remove(q);
 				        System.out.println("Your Quotation is successfully deleted!");
 				        break;
@@ -100,6 +111,7 @@ public class QuotationMain {
 			Helper.line(70, "-");
 			System.out.println("There are no Quotations currently.");
 		}
+		return qu;
 	}
 
 }
