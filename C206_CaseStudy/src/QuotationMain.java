@@ -34,6 +34,7 @@ public class QuotationMain {
 		
 		        Quotation q1 = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
 		        addQuotation(quoteList, q1);
+		        break;
 		        
 			} else if (choice == 2) {
 				viewQuotations(quoteList);
@@ -65,6 +66,7 @@ public class QuotationMain {
 			
 			Helper.line(70, "-");
 			System.out.println("There are no Quotations currently."); 
+			
 		  
 		} else {
 			 System.out.println("VIEW ALL QUOTATIONS");
@@ -78,6 +80,7 @@ public class QuotationMain {
 			    System.out.println(String.format("%-10d %-15d %-15s %-15s %-15.2f %-15s %-15s %-15.2f\n", q.getReqid(), 
 					q.getQuotid(), q.getCateg(), q.getDescrip(), q.getPrice(), q.getDesname(), 
 					q.getStartdate(), q.getTotalamt()));
+			    break;
 			
 		    }
 		}
