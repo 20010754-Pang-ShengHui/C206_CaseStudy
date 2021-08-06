@@ -14,6 +14,7 @@ public class AppointmentMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
+		start(un,rl);
 	}
 	
 	public static void start(String un,String role) {
@@ -25,7 +26,7 @@ public class AppointmentMain {
 			output += "2. View Appointment\n";
 			output += "3. Change Appointment\n";
 			output += "4. Delete Appointment\n";
-			output += "5. Logout& Quit";
+			output += "5. Logout & Quit";
 			System.out.println(output);
 			choice = Helper.readInt("Enter choice > ");
 			if (choice==1) {
@@ -98,8 +99,7 @@ public class AppointmentMain {
 			Helper.line(70, "-");
 			int choice = 0;
 			while (choice!=3) {
-				viewApt();
-				String output = "Appointment Page\n";
+				String output = "Change Appointment Page\n";
 				output += "1. Change Date\n";
 				output += "2. Change Time\n";
 				output += "3. Back\n";
