@@ -99,6 +99,7 @@ public class AppointmentMain {
 			Helper.line(70, "-");
 			int choice = 0;
 			while (choice!=3) {
+				viewApt();
 				String output = "Change Appointment Page\n";
 				output += "1. Change Date\n";
 				output += "2. Change Time\n";
