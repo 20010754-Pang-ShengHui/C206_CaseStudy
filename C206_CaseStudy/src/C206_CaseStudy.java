@@ -14,8 +14,6 @@ public class C206_CaseStudy {
 
 	private static void start() {
 
-		accList.add(new Account("PSH", "Admin", "1234@123com", "123", 87654321));
-
 		int choice = -1;
 		while (choice != 3) {
 			menuList();
@@ -69,15 +67,14 @@ public class C206_CaseStudy {
 
 	private static void memberhome(String username, String role) {
 		if (role.trim().equals("Member".trim())) {
-			Helper.line(50, "-");
-			String output = "Home Page\n";
-			output += "1. Request for Quotation\n";
-			output += "2. Manage Appointment\n";
-			output += "3. Quit";
-			System.out.println(output);
 			int choice = -1;
 			while (choice != 3) {
-				adminView();
+				Helper.line(50, "-");
+				String output = "Home Page\n";
+				output += "1. Request for Quotation\n";
+				output += "2. Manage Appointment\n";
+				output += "3. Quit";
+				System.out.println(output);
 				choice = Helper.readInt("Enter choice > ");
 				if (choice == 2) {
 
@@ -89,6 +86,15 @@ public class C206_CaseStudy {
 			menuList();
 
 		} else if (role.trim().equals("Admin".trim())) {
+			//		Helper.line(50, "-");
+			//		String output = "Home Page\n";
+			//		output += "1. Manage Account\n";
+			//		output += "2. Manage Package\n";
+			//		output += "3. Manage Request for Quotation\n";
+			//		output += "4. Manage Quotation\n";
+			//		output += "5. Manage Appointment\n";
+			//		output += "6. Quit";
+			//		System.out.println(output);
 			int choice = -1;
 			while (choice != 6) {
 				adminView();
@@ -108,9 +114,9 @@ public class C206_CaseStudy {
 						System.out.println(msg);
 					}
 				} else if (choice == 2) {
+					AdminPackageMain.start(username, rl);
 
 				} else if (choice == 3) {
-
 				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
@@ -171,20 +177,22 @@ public class C206_CaseStudy {
 		Account acc = null;
 		String name = Helper.readString("Enter name > ");
 		String role = Helper.readString("Enter role (Admin/Member/Designer) > ");
-		int contact = Helper.readInt("Enter contact number >");
-		String email = Helper.readString("Enter email >");
-		String password = Helper.readString("Enter password >");
+		int contact = Helper.readInt("Enter contact number > ");
+		String email = Helper.readString("Enter email > ");
+		String password = Helper.readString("Enter password > ");
 
 		while (name.isEmpty() || role.isEmpty() || email.isEmpty() || password.isEmpty()) {
 			System.out.println("Please fill in all the neccessary field");
 			name = Helper.readString("Enter name > ");
 			role = Helper.readString("Enter role (Admin/Member/Designer) > ");
-			contact = Helper.readInt("Enter contact number >");
+			role = rl;
+			contact = Helper.readInt("Enter contact number > ");
 			email = Helper.readString("Enter email >");
 			password = Helper.readString("Enter password >");
 		}
 
 		acc = new Account(name, role, email, password, contact);
+		System.out.println(acc.getRole());
 		return acc;
 	}
 

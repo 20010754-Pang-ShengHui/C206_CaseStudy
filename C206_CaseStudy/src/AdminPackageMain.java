@@ -9,9 +9,13 @@ public class AdminPackageMain extends AdminPackage{
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
+	}
+	
+	public static void start(String un,String role) {
 		ArrayList<AdminPackage> PackageList = new ArrayList<AdminPackage>();
-		
-		
+
+
 		String output = "Package Management\n";
 		output += "1. Add Package\n";
 		output += "2. View Packages\n";
@@ -20,26 +24,28 @@ public class AdminPackageMain extends AdminPackage{
 		System.out.println(output);
 		int choice = Helper.readInt("Enter choice > ");
 		while (choice!=4) {
-		
-		if (choice==4) {
-			System.out.println("Bye!");
-			System.exit(0);
+
+			if (choice==4) {
+				System.out.println("Bye!");
+				System.exit(0);
+			}
+
+			if (choice == 1){
+				AdminPackageMain pkg = inputPackage();
+				AdminPackageMain.addPackage(PackageList,pkg);
+			}
+			else if (choice == 2) {
+				AdminPackageMain.viewAllPackages(PackageList);
+			}
+			else if (choice == 3) {
+				AdminPackageMain.deletePackages(PackageList);
+			}else {
+				System.out.println("Invalid Number.");
+			}
 		}
 		
-		if (choice == 1){
-			AdminPackageMain pkg = inputPackage();
-			AdminPackageMain.addPackage(PackageList,pkg);
-		}
-		else if (choice == 2) {
-			AdminPackageMain.viewAllPackages(PackageList);
-		}
-		else if (choice == 3) {
-			AdminPackageMain.deletePackages(PackageList);
-		}else {
-			System.out.println("Invalid Number.");
-		}
-		}
-		}
+	}
+	
 	
 //Option 1 Add Package
 	public static AdminPackageMain inputPackage() {	
