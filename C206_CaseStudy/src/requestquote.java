@@ -1,21 +1,22 @@
-import java.time.LocalDate;
 
 public class requestquote {
 	
 	private String proptype;
 	private int area;
+	private String Name;
 	private String NumEmail;
 	private int budget;
-	private LocalDate enddate;
+	private String enddate;
 	private String renotype;
 	private int rooms;
 	private int toilets;
 	private String renostyle;
 	private String req;
 	
-	public requestquote(String proptype,int area,String NumEmail,int budget,LocalDate enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
+	public requestquote(String proptype,int area,String Name,String NumEmail,int budget,String enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
 		this.proptype = proptype;
 		this.area = area;
+		this.Name = Name;
 		this.NumEmail = NumEmail;
 		this.budget = budget;
 		this.enddate = enddate;
@@ -42,6 +43,15 @@ public class requestquote {
 	public void setarea(int area) {
 		this.area = area;
 	}
+	public String getname() {
+		return Name;
+	}
+
+	public void setname(String name) {
+		this.Name = name;
+	
+	}
+
 
 	public String getNumEmail() {
 		return NumEmail;
@@ -61,11 +71,11 @@ public class requestquote {
 	
 	}
 
-	public LocalDate getenddate() {
+	public String getenddate() {
 		return enddate;
 	}
 
-	public void setenddate(LocalDate enddate) {
+	public void setenddate(String enddate) {
 		this.enddate = enddate;
 	}
 	
