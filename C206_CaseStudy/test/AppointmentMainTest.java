@@ -90,5 +90,6 @@ public class AppointmentMainTest {
 		lcTime = null;
 		apt1 = null;
 		apt2 = null;
+		apptList = null;
 	}
 }
