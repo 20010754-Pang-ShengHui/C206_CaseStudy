@@ -98,9 +98,9 @@ public class AppointmentMainTest {
 		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
 
 		AppointmentMain.cDate(apptList,apt1,lcDate);
-		assertSame("Check whether the time changed matches the Appointment List",lcDate, apptList.get(0).getDoA());
+		assertSame("Check whether the date changed matches the Appointment List",lcDate, apptList.get(0).getDoA());
 		
-		AppointmentMain.cTime(apptList,apt1,lcTime);
+		AppointmentMain.cTime(apptList,apt2,lcTime);
 		assertSame("Check whether the time changed matches the Appointment List",lcTime, apptList.get(0).getToA());
 	}
 	
