@@ -36,7 +36,7 @@ public class AppointmentMainTest {
 		
 		AppointmentMain.addApt(apptList,apt2);
 		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
-		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
+		assertSame("Check whether apt2 is added",apt2,apptList.get(1));
 
 	}
 
@@ -77,7 +77,7 @@ public class AppointmentMainTest {
 
 		AppointmentMain.cDelapt(apptList, apt1);
 		assertEquals("Check whether the Appointment List is 1", 1,apptList.size());
-		assertNotSame("Check whether apt1 is added",apt1,apptList.get(0));
+		assertNotSame("Check whether apt2 is deleted",apt1,apptList.get(0));
 		
 		
 		AppointmentMain.cDelapt(apptList, apt2);
@@ -95,7 +95,7 @@ public class AppointmentMainTest {
 		
 		AppointmentMain.addApt(apptList,apt2);
 		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
-		assertSame("Check whether apt1 is added",apt2,apptList.get(1));
+		assertSame("Check whether apt2 is added",apt2,apptList.get(1));
 
 		AppointmentMain.cDate(apptList,apt1,lcDate);
 		assertSame("Check whether the date changed matches the Appointment List",lcDate, apptList.get(0).getDoA());
