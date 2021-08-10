@@ -1,11 +1,11 @@
 
-public class requestquote {
+public class RequestQuote {
 	
 	private String proptype;
 	private int area;
-	private String Name;
+	private String name;
 	private String NumEmail;
-	private int budget;
+	private double budget;
 	private String enddate;
 	private String renotype;
 	private int rooms;
@@ -13,10 +13,10 @@ public class requestquote {
 	private String renostyle;
 	private String req;
 	
-	public requestquote(String proptype,int area,String Name,String NumEmail,int budget,String enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
+	public requestquote(String proptype,int area,String name,String NumEmail,double budget,String enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
 		this.proptype = proptype;
 		this.area = area;
-		this.Name = Name;
+		this.name = name;
 		this.NumEmail = NumEmail;
 		this.budget = budget;
 		this.enddate = enddate;
@@ -44,11 +44,11 @@ public class requestquote {
 		this.area = area;
 	}
 	public String getname() {
-		return Name;
+		return name;
 	}
 
 	public void setname(String name) {
-		this.Name = name;
+		this.name = name;
 	
 	}
 
@@ -66,7 +66,7 @@ public class requestquote {
 		return budget;
 	}
 
-	public void setbudget(int budget) {
+	public void setbudget(double budget) {
 		this.budget = budget;
 	
 	}
