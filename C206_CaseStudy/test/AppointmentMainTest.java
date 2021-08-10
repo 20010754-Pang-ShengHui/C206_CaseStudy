@@ -54,7 +54,7 @@ public class AppointmentMainTest {
 		assertEquals("Check whether the Appointment List is 2", 2,apptList.size());
 		
 		allApts = AppointmentMain.retrieveAllAppointments(apptList);
-		testOutput+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",1,"PSH", lcDate, lcTime, "John", "Singapore");
+		testOutput=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",1,"PSH", lcDate, lcTime, "John", "Singapore");
 		testOutput+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",2,"Test2", lcDate, lcTime, "John", "Singapore");
 		
 		

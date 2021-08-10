@@ -9,13 +9,10 @@ public class AppointmentMain {
 
 	private static ArrayList<Appointment> apptList = new ArrayList<Appointment>();
 	
-	private static String un = "PSH";
-	private static String rl = "Admin";
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
-		start(un,rl);
 	}
 	
 	public static void start(String un,String role) {
@@ -79,8 +76,8 @@ public class AppointmentMain {
 	
 	public static String retrieveAllAppointments(ArrayList<Appointment> aptList) {
 		String o = "";
-		for (int i = 0;i<apptList.size();i++) {
-			Appointment a = apptList.get(i);
+		for (int i = 0;i<aptList.size();i++) {
+			Appointment a = aptList.get(i);
 			o+=String.format("%-4d %-10s %-13s %-15s %-10s %s\n",
 					i+1,a.getuName(),a.getDoA(),a.getToA(),a.getdName(),a.getAddress()
 					);

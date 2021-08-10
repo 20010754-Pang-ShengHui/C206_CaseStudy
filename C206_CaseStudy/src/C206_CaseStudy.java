@@ -128,9 +128,10 @@ public class C206_CaseStudy {
 					}
 				} else if (choice == 2) {
 					AdminPackageMain.start(username, rl);
-
+					break;
 				} else if (choice == 3) {
 					requestquoteMain.start(username, role);
+					break;
 				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
 					break;
