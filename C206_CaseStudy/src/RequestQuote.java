@@ -13,7 +13,7 @@ public class RequestQuote {
 	private String renostyle;
 	private String req;
 	
-	public requestquote(String proptype,int area,String name,String NumEmail,double budget,String enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
+	public RequestQuote(String proptype,int area,String name,String NumEmail,double budget,String enddate,String renotype,int rooms,int toilets,String renostyle,String req) {
 		this.proptype = proptype;
 		this.area = area;
 		this.name = name;
@@ -62,7 +62,7 @@ public class RequestQuote {
 	
 	}
 
-	public int getbudget() {
+	public double getbudget() {
 		return budget;
 	}
 
