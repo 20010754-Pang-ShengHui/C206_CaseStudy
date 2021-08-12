@@ -4,12 +4,13 @@ public class QuotationMain {
 	
 	private static ArrayList<Quotation> quoteList = new ArrayList<Quotation>();
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
-	}
+//	public static void main(String[] args) {
+//		// TODO Auto-generated method stub
+//		
+//		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
+//	}
 	
-	public static void start(String un,String role) {
+	public static void start(String un, String role) {
 		
 		int choice = -1;
 		
@@ -31,7 +32,7 @@ public class QuotationMain {
 		
 		        Quotation q1 = new Quotation(reqid, quotid, categ, descrip, price, desname, startdate, totalamt);
 		        addQuotation(quoteList, q1);
-		        break;
+		        
 		        
 			} else if (choice == 2) {
 				viewQuotations(quoteList);
@@ -40,7 +41,7 @@ public class QuotationMain {
 				deleteQuotation();
 			
 		    }
-			choice = Helper.readInt("Enter choice > ");
+			
 			
 			
 		} if (choice == 4) {

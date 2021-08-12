@@ -130,7 +130,7 @@ public class C206_CaseStudy {
 					AdminPackageMain.start(username, rl);
 					break;
 				} else if (choice == 3) {
-					requestquoteMain.start(username, role);
+					RequestQuoteMain.start(username, rl);
 					break;
 				} else if (choice == 4) {
 					QuotationMain.start(username, rl);
