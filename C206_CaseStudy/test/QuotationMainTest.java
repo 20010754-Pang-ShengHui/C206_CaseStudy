@@ -60,7 +60,7 @@ public class QuotationMainTest {
 	
 		
 		QuotationMain.DelQuo(quoteListTest, q2);
-		assertEquals("Check whether the Appointment List is 1", 0, quoteListTest.size());
+		assertEquals("Check whether the Quotation List is 1", 0, quoteListTest.size());
 
 	}
 	
