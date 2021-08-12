@@ -6,16 +6,7 @@ public class RequestQuoteMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	}
-	
-	public static void start(String un,String role) {
-		Helper.line(50, "-");
-		String output = "REQUEST FOR QUOTE Page\n";
-		output += "1. Add REQUEST FOR QUOTE\n";
-		output += "2. View REQUEST FOR QUOTE\n";
-		output += "3. REQUEST FOR QUOTE\n";
-		output += "4. Quit";
-		System.out.println(output);
+		menu();
 		int choice = Helper.readInt("Enter choice > ");
 		while (choice!=4) {
 		
@@ -25,7 +16,7 @@ public class RequestQuoteMain {
 				int area = Helper.readInt("Enter area size > ");
 				String Name = Helper.readString("Enter name > ");
 				String NumEmail = Helper.readString("Enter contact number & email > ");
-				int budget = Helper.readInt("Enter budget > ");
+				double budget = Helper.readDouble("Enter budget > ");
 				String enddate = Helper.readString("Enter target completion date > ");
 				String renotype =Helper.readString("Enter renovation type > ");
 				int rooms = Helper.readInt("Enter number of rooms to renovate > ");
@@ -33,26 +24,27 @@ public class RequestQuoteMain {
 				String renostyle = Helper.readString("Enter prefered renovation style > ");
 				String req = Helper.readString("Enter (urgent) for urgent request > " );
 				
-				requestquote reqquote = new RequestQuote(proptype,area,Name,NumEmail,budget,enddate,renotype,rooms,toilets,renostyle,req);
-				addRequestQuote(reqQuoteList, reqquote);
-		        break;
+				RequestQuote reqquote = new RequestQuote(proptype,area,Name,NumEmail,budget,enddate,renotype,rooms,toilets,renostyle,req);
+				addRequestquote(reqquote);
+				menu();
 		        
 			} else if (choice == 2) {
-				viewRequestQuote(reqQuoteList);
+				viewRequestquote();
+				menu();
 				
 			} else if (choice == 3) {
-				deleteRequestQuote();
-			
-			
+				deleteRequestquote();
+				menu();
 			
 		    } else if (choice==4) {
 			    System.out.println("Bye!");
-			    System.exit(0);
+			    menu();
 		    }
+			choice=Helper.readInt("Enter choice > ");
 		} 
 	}	
 	//add request for quote
-	public static void addRequestquote(ArrayList<RequestQuote> reqQuoteList, RequestQuote reqquote) {		
+	public static void addRequestquote(RequestQuote reqquote) {		
 			
 		reqQuoteList.add(reqquote);
 		System.out.println("Request added");
@@ -60,8 +52,11 @@ public class RequestQuoteMain {
 		
 	
 	//view request for quote
-	public static void viewRequestquote(ArrayList<RequestQuote> reqQuoteList) {
-		
+	public static void viewRequestquote() {
+		System.out.println("VIEW ALL REQUESTS FOR QUOTATIONS");
+		String output=String.format("%-15s %-10s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s %-15s", "Property type", 
+				"Area Size", "Request Name", "Contact Number and Email", "Budget", "Target Completion Date", "Renovation Type", 
+				"Number of rooms to renovate", "Number of toilets to renovate", "Renovation Style","Request urgency");
 		
 		if (reqQuoteList.isEmpty()) {
 			
@@ -70,37 +65,24 @@ public class RequestQuoteMain {
 			
 		  
 		} else {
-			 System.out.println("VIEW ALL REQUESTS FOR QUOTATIONS");
-		     System.out.println(String.format("%-15s %-10d %-15s %-15s %-15.2f %-15s %-15s %-15s %-15s %-15s %-15s", "Property type", 
-				"Area Size", "Request Name", "Contact Number and Email", "Budget", "Target Completion Date", "Renovation Type", 
-				"Number of rooms to renovate", "Number of toilets to renovate", "Renovation Style","Request urgency"));
 		
 		    for (int i = 0; i < reqQuoteList.size(); i++) {
 			
 		    	RequestQuote rq = reqQuoteList.get(i);
-			    System.out.println(String.format("%-15s %-10d %-15s %-15s %-15.2f %-15s %-15s %-15s %-15s %-15s %-15s",rq.getproptype(),
+			    output+=(String.format("%-15s %-10d %-15s %-15s %-15.2f %-15s %-15s %-15s %-15s %-15s %-15s",rq.getproptype(),
 			    	rq.getarea(), rq.getname(), rq.getNumEmail(), rq.getbudget(), 
 					rq.getenddate(), rq.getrenotype(), rq.getrooms(), rq.gettoilets(), rq.getrenostyle(), rq.getreq()));
-			    break;
-			
 		    }
 		}
 		
 	}
 	
 	//delete request for quote
-	public static void deleteRQ(ArrayList<RequestQuote> reqQuoteList, RequestQuote reqquote) {
-		for (int i = 0;i< reqQuoteList.size(); i++) {
-			if (reqQuoteList.get(i) == rq) {
-				reqQuoteList.remove(rq);
-			}
-			
-		}
-	}	
+	
 	
 	public static void deleteRequestquote() {
 		if (!reqQuoteList.isEmpty()) {
-			viewRequestQuote(reqQuoteList);
+			viewRequestquote();
 			String delreqquote = Helper.readString("Enter request name to delete: ");
 			char yn = Helper.readChar("Are you sure you want to delete? (Y/N) > ");
 			    
@@ -123,5 +105,14 @@ public class RequestQuoteMain {
 			System.out.println("There are no request for quote.");
 			}
 		}
+	public static void menu() {
+		Helper.line(50, "-");
+		String output = "REQUEST FOR QUOTE Page\n";
+		output += "1. Add REQUEST FOR QUOTE\n";
+		output += "2. View REQUEST FOR QUOTE\n";
+		output += "3. REQUEST FOR QUOTE\n";
+		output += "4. Quit";
+		System.out.println(output);
+	}
 	
 	}
