@@ -5,7 +5,9 @@ public class RequestQuoteMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		System.out.println("Cannot load program from here. Please use C206_CaseStudy.java!");
+	}	
+	public static void start(String un,String role) {
 		menu();
 		int choice = Helper.readInt("Enter choice > ");
 		while (choice!=4) {
@@ -42,7 +44,8 @@ public class RequestQuoteMain {
 		    }
 			choice=Helper.readInt("Enter choice > ");
 		} 
-	}	
+		
+	}
 	//add request for quote
 	public static void addRequestquote(RequestQuote reqquote) {		
 			
